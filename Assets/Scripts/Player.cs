@@ -1,0 +1,194 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using UnityEngine.SceneManagement;
+
+public class Player : MonoBehaviour, IDamageable
+{
+    public int level;
+    public GameObject weaponPrefab;
+    public GameObject droppedItemPrefab;
+    public int[] inventory;
+    private int selectedSlot;
+    [SerializeField] private Slider healthSlider;
+    [SerializeField] private Text coinText;
+    private Weapon weapon;
+    public float moveSpeed = 10f;
+    public int coins = 0;
+    private Rigidbody2D rb;
+    private Vector2 moveInput;
+    private int facing;
+    public int health = 20;
+    public int maxHealth = 20;
+    private bool canAttack = true;
+
+    void Awake()
+    {
+        if (FindObjectsOfType<Player>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+
+        rb = GetComponent<Rigidbody2D>();
+        inventory = new int[10];
+        inventory[2] = 101;
+        StartLevel();
+
+    }
+    IEnumerator ReloadCoroutine()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        while (!asyncLoad.isDone)
+            yield return null;
+
+        StartLevel();
+    }
+    void StartLevel()
+    {
+        transform.position = new Vector3(3, 3, 0);
+
+        weapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity).GetComponent<Weapon>();
+        weapon.parent = transform;
+
+        SelectSlot(selectedSlot);
+    }
+    void SelectSlot(int slot)
+    {
+        Debug.Log("selecting slot " + slot);
+        selectedSlot = slot;
+        if (inventory[selectedSlot] % 100 == 1)
+        {
+            weapon.Unhide();
+            weapon.Picked(inventory[selectedSlot]);
+        }
+        else
+        {
+            weapon.Hide();
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            StartCoroutine(ReloadCoroutine());
+            StartLevel();
+        }
+
+        moveInput = Vector2.zero;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            moveInput.y += 1;
+            facing = 2;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveInput.y -= 1;
+            facing = 3;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveInput.x += 1;
+            facing = 1;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveInput.x -= 1;
+            facing = 0;
+        }
+        if (Input.GetMouseButtonDown(0) && inventory[selectedSlot] % 100 == 1)
+        {
+            if (canAttack) StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            DropItem();
+        }
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            SelectSlot(0);
+        }
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            SelectSlot(1);
+        }
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            SelectSlot(2);
+        }
+        if (Input.GetKey(KeyCode.Alpha4))
+        {
+            SelectSlot(3);
+        }
+        if (Input.GetKey(KeyCode.Alpha5))
+        {
+            SelectSlot(4);
+        }
+        if (Input.GetKey(KeyCode.Alpha6))
+        {
+            SelectSlot(5);
+        }
+        if (Input.GetKey(KeyCode.Alpha7))
+        {
+            SelectSlot(6);
+        }
+        if (Input.GetKey(KeyCode.Alpha8))
+        {
+            SelectSlot(7);
+        }
+
+        weapon.facing = facing;
+        moveInput = moveInput.normalized;
+    }
+
+    void FixedUpdate()
+    {
+        rb.linearVelocity = moveInput * moveSpeed;
+    }
+    public void TakeDamage(int amount, Vector2 direction, float knockback)
+    {
+        health -= amount;
+        healthSlider.value = (float)health / (float)maxHealth;
+    }
+    IEnumerator AttackTime(float preWait, float postWait)
+    {
+        weapon.Charge();
+        canAttack = false;
+        yield return new WaitForSeconds(preWait);
+        weapon.Attack();
+        yield return new WaitForSeconds(postWait);
+        weapon.Reset();
+        canAttack = true;
+    }
+    public void UpdateCoin(int amount)
+    {
+        coins += amount;
+        coinText.text = "Coins: " + coins.ToString();
+    }
+
+    public void AddItem(int id)
+    {
+        Debug.Log("picked up item " + id);
+        if (id == 1)
+        {
+            int amount = Random.Range(5, 10);
+            UpdateCoin(amount);
+            return;
+        }
+        DropItem();
+        inventory[selectedSlot] = id;
+        SelectSlot(selectedSlot);
+    }
+    public void DropItem()
+    {
+        if (inventory[selectedSlot] == 0) return;
+        GameObject droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
+        droppedItem.GetComponent<DroppedItem>().Initialize(inventory[selectedSlot]);
+        inventory[selectedSlot] = 0;
+        SelectSlot(selectedSlot);
+    }
+}
