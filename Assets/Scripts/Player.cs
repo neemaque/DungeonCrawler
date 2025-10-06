@@ -104,29 +104,29 @@ public class Player : MonoBehaviour, IDamageable
                 interactable.Interact();
             }
         }
-
+        Turn(mousePos);
 
         moveInput = Vector2.zero;
 
         if (Input.GetKey(KeyCode.W))
         {
             moveInput.y += 1;
-            facing = 2;
+            //facing = 2;
         }
         if (Input.GetKey(KeyCode.S))
         {
             moveInput.y -= 1;
-            facing = 3;
+            //facing = 3;
         }
         if (Input.GetKey(KeyCode.D))
         {
             moveInput.x += 1;
-            facing = 1;
+            //facing = 1;
         }
         if (Input.GetKey(KeyCode.A))
         {
             moveInput.x -= 1;
-            facing = 0;
+            //facing = 0;
         }
         if (Input.GetMouseButtonDown(0) && inventory[selectedSlot] / 100 == 1)
         {
@@ -173,10 +173,24 @@ public class Player : MonoBehaviour, IDamageable
         weapon.facing = facing;
         moveInput = moveInput.normalized;
     }
-
     void FixedUpdate()
     {
         rb.linearVelocity = moveInput * moveSpeed;
+    }
+    private void Turn(Vector3 mousePos)
+    {
+        float x = mousePos.x - transform.position.x;
+        float y = mousePos.y - transform.position.y;
+        if (Mathf.Abs(x) > Mathf.Abs(y))
+        {
+            if (x < 0) facing = 0;
+            else facing = 1;
+        }
+        else
+        {
+            if (y < 0) facing = 3;
+            else facing = 2;
+        }
     }
     public void TakeDamage(int amount, Vector2 direction, float knockback)
     {
@@ -188,7 +202,7 @@ public class Player : MonoBehaviour, IDamageable
         weapon.Charge();
         canAttack = false;
         yield return new WaitForSeconds(preWait);
-        weapon.Attack();
+        weapon.Attack(true);
         yield return new WaitForSeconds(postWait);
         weapon.Reset();
         canAttack = true;

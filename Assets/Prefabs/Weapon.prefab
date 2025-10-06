@@ -124,6 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3181141991922783465}
   - component: {fileID: 6974360529933443304}
+  - component: {fileID: 8823414519629043678}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -204,3 +205,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8823414519629043678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4614019360091460140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eafa7dd57af9f2478263b1acc662f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteSorter

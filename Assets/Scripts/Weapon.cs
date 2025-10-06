@@ -54,13 +54,15 @@ public class Weapon : MonoBehaviour
             rotationSpeed * Time.deltaTime
         );
     }
-    public void Attack()
+    public void Attack(bool isPlayer)
     {
         if (direction.x > 0) targetRotation = Quaternion.Euler(0, 0, -100);
         else targetRotation = Quaternion.Euler(0, 0, 100);
         rotationSpeed = 1000f;
         Vector2 attackPos = (Vector2)transform.position;
-        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos, range, hitMask);
+        float rangeUp = range;
+        if (isPlayer) rangeUp = range + 0.5f;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(attackPos, rangeUp, hitMask);
 
         foreach (var hit in hits)
         {

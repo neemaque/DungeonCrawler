@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class Enemy : MonoBehaviour, IDamageable
 {
     public int id = 1;
+    public string name;
     public int health = 20;
     public int maxHealth = 20;
     public float range;
@@ -41,12 +42,14 @@ public class Enemy : MonoBehaviour, IDamageable
     public void Initialize(NPC npc)
     {
         id = npc.id;
+        name = npc.name;
         maxHealth = npc.maxHealth;
         health = maxHealth;
         moveSpeed = npc.moveSpeed;
         weaponOfChoice = npc.weaponOfChoice;
         range = npc.range;
 
+        nameText.text = name;
         
         BuildInventory();
         weapon = Instantiate(weaponPrefab, transform.position, Quaternion.identity).GetComponent<Weapon>();
@@ -115,6 +118,10 @@ public class Enemy : MonoBehaviour, IDamageable
             LookAt(dir);
             rb.linearVelocity = dir * moveSpeed;
         }
+        else if (Vector2.Distance(target, transform.position) <= 0.1 && canMove)
+        {
+            rb.linearVelocity = new Vector2(0, 0);
+        }
         else if (phase == "idle")
         {
             rb.linearVelocity = new Vector2(0, 0);
@@ -146,7 +153,7 @@ public class Enemy : MonoBehaviour, IDamageable
         canAttack = false;
         canMove = false;
         yield return new WaitForSeconds(preWait);
-        weapon.Attack();
+        weapon.Attack(false);
         canMove = true;
         yield return new WaitForSeconds(postWait/2);
         weapon.Reset();

@@ -261,16 +261,16 @@ MonoBehaviour:
     sprite: {fileID: 0}
   npcs:
   - id: 1
-    name: 
+    name: Zombie
     description: 
-    maxHealth: 20
+    maxHealth: 10
     moveSpeed: 3
-    weaponOfChoice: 101
+    weaponOfChoice: 102
     range: 10
     gang: 1
     sprite: {fileID: 0}
   - id: 2
-    name: 
+    name: Gnome
     description: 
     maxHealth: 5
     moveSpeed: 3
@@ -764,63 +764,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284844203}
   m_CullTransparentMesh: 1
---- !u!1001 &311750555
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 5.7178106
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.4959974
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1770871112172872446, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9070397969361713009, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
-      propertyPath: m_Name
-      value: Exit
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
 --- !u!1 &431450640
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,7 +1033,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000fbfe331e391a3a1b
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1929,6 +1872,7 @@ GameObject:
   - component: {fileID: 1763872355}
   - component: {fileID: 1763872354}
   - component: {fileID: 1763872353}
+  - component: {fileID: 1763872358}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -2038,7 +1982,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
 --- !u!50 &1763872355
 Rigidbody2D:
@@ -2104,6 +2048,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1763872358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763872352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eafa7dd57af9f2478263b1acc662f54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteSorter
 --- !u!1 &1865848592
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,4 +2265,3 @@ SceneRoots:
   - {fileID: 1652055688}
   - {fileID: 638953823}
   - {fileID: 751653592}
-  - {fileID: 311750555}

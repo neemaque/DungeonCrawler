@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 456792633
+    locked: 0
+  - name: DroppedItems
+    uniqueID: 506724091
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
