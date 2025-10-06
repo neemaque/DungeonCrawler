@@ -37,6 +37,12 @@ public class Player : MonoBehaviour, IDamageable
         StartLevel();
 
     }
+    public void NextLevel()
+    {
+        Debug.Log("next leveled");
+        StartCoroutine(ReloadCoroutine());
+        level++;
+    }
     IEnumerator ReloadCoroutine()
     {
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
@@ -58,7 +64,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         Debug.Log("selecting slot " + slot);
         selectedSlot = slot;
-        if (inventory[selectedSlot] % 100 == 1)
+        if (inventory[selectedSlot] / 100 == 1)
         {
             weapon.Unhide();
             weapon.Picked(inventory[selectedSlot]);
@@ -76,6 +82,29 @@ public class Player : MonoBehaviour, IDamageable
             StartCoroutine(ReloadCoroutine());
             StartLevel();
         }
+        Vector3 mousePos = new Vector3();
+        if(Input.mousePosition.x < 10000)mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
+        mousePos.z = 0f;
+        RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
+
+        Interactable interactable = null;
+        if (hit.collider != null)
+        {
+            float dist = Vector2.Distance(transform.position, hit.transform.position);
+            if (dist <= 4f)
+            {
+                interactable = hit.collider.gameObject.GetComponent<Interactable>();
+                if(interactable != null)interactable.Hover();
+            }
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (interactable != null)
+            {
+                interactable.Interact();
+            }
+        }
+
 
         moveInput = Vector2.zero;
 
@@ -99,7 +128,7 @@ public class Player : MonoBehaviour, IDamageable
             moveInput.x -= 1;
             facing = 0;
         }
-        if (Input.GetMouseButtonDown(0) && inventory[selectedSlot] % 100 == 1)
+        if (Input.GetMouseButtonDown(0) && inventory[selectedSlot] / 100 == 1)
         {
             if (canAttack) StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
         }

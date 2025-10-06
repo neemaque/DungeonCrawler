@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DroppedItem : MonoBehaviour
+public class DroppedItem : MonoBehaviour, Interactable
 {
     private GameObject player;
     private GameManager gameManager;
@@ -10,7 +10,7 @@ public class DroppedItem : MonoBehaviour
     private Item item;
     void Awake()
     {
-        
+
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -33,45 +33,15 @@ public class DroppedItem : MonoBehaviour
         float dropForce = Random.Range(300f, 500f);
         rb.AddForce(dir * dropForce);
     }
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
 
-            if (hit.collider != null)
-            {
-                if (hit.transform == transform)
-                {
-                    float dist = Vector2.Distance(player.transform.position, transform.position);
-                    if (dist <= 4f)
-                    {
-                        Debug.Log("interacted");
-                        Interact();
-                    }
-                }
-            }
-        }
-        else
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero);
-
-            if (hit.collider != null)
-            {
-                if (hit.transform == transform)
-                {
-                    string itemDescription = item.toString();
-                    itemDescriptionText.GetItem(itemDescription);
-                }
-            }
-        }
-    }
-
-    void Interact()
+    public void Interact()
     {
         player.GetComponent<Player>().AddItem(id);
         gameObject.SetActive(false);
+    }
+    public void Hover()
+    {
+        string itemDescription = item.toString();
+        itemDescriptionText.GetItem(itemDescription);
     }
 }
