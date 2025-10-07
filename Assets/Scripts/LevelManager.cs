@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
+    public int NPCLimit = 10;
+    private int totalNPCs = 0;
     private bool[,] used;
     private bool[,] taken;
     public GameObject wallPrefab;
@@ -272,8 +274,12 @@ public class LevelManager : MonoBehaviour
     {
         FindExit(25, 25, 0);
         RoomConfig room = new RoomConfig();
-        if (maxDepth > 0) room = rooms[exitX, exitY].Value;
-        else room = rooms[25, 25].Value;
+        if (maxDepth == 0)
+        {
+            exitX = 25;
+            exitY = 25;
+        }
+        room = rooms[exitX, exitY].Value;
         room.isExit = true;
         rooms[exitX, exitY] = room;
 
@@ -313,10 +319,10 @@ public class LevelManager : MonoBehaviour
     {
         used[x, y] = true;
         RoomConfig room = rooms[x, y].Value;
-
-        int numberOfEnemies = Random.Range(-3, 2);
+        int numberOfEnemies = Random.Range(-5, 2);
         while (numberOfEnemies > 0)
         {
+            if (totalNPCs >= NPCLimit || x==25 && y==25) break;
             NPC npc = SelectNPC();
             for (int i = 0; i < npc.gang; i++)
             {
@@ -325,6 +331,7 @@ public class LevelManager : MonoBehaviour
                 Vector3 pos = new Vector3((x - 25) * 8 + placement.x, (y - 25) * 8 + placement.y, 0);
                 GameObject npcObject = Instantiate(enemyPrefab, pos, Quaternion.identity);
                 npcObject.GetComponent<Enemy>().Initialize(npc);
+                totalNPCs++;
                 
                 taken[(int)pos.x + 500, (int)pos.y + 500] = true;
             }

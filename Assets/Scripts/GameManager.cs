@@ -24,6 +24,56 @@ public class GameManager : MonoBehaviour
             items.Add(x);
         }
     }
+    public Item RollItem()
+    {
+        int totalWeight = 0;
+        foreach (Item x in items)
+        {
+            totalWeight += x.rarity;
+        }
+        int rand = Random.Range(0, totalWeight + 1);
+
+        foreach (Item x in items)
+        {
+            if (rand < x.rarity)
+            {
+                return x;
+            }
+            rand -= x.rarity;
+        }
+        return items[0];
+    }
+    public Item RollItemWithIDs(List<int> ids)
+    {
+        List<Item> listOfItems = new List<Item>();
+        foreach (int id in ids)
+        {
+            foreach (Item x in items)
+            {
+                if (x.id == id)
+                {
+                    listOfItems.Add(x);
+                    break;
+                }
+            }
+        }
+        int totalWeight = 0;
+        foreach (Item x in listOfItems)
+        {
+            totalWeight += x.rarity;
+        }
+        int rand = Random.Range(0, totalWeight + 1);
+
+        foreach (Item x in listOfItems)
+        {
+            if (rand < x.rarity)
+            {
+                return x;
+            }
+            rand -= x.rarity;
+        }
+        return items[0];
+    }
 }
 
 [System.Serializable]
@@ -32,6 +82,8 @@ public class Item
     public int id;
     public string name;
     public string description;
+    public int rarity;
+    public int price;
     public Sprite sprite;
     public virtual string toString()
     {

@@ -552,7 +552,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 532911471
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &200771684
@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000fbfe331e391a3a1b
+  m_ApplyToSortingLayers: 00000000fbfe331e391a3a1b6f95c31f
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0

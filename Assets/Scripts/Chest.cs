@@ -5,19 +5,26 @@ using System.Collections.Generic;
 public class Chest : MonoBehaviour, Interactable
 {
     private GameObject player;
+    private GameManager gameManager;
+    
     public GameObject droppedItemPrefab;
     private List<int> inventory;
     private bool emptied = false;
     private void Awake()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GameObject.Find("Player");
         inventory = new List<int>();
-        BuildInventory();
+        
     }
     private void BuildInventory()
     {
-        inventory.Add(1);
-        inventory.Add(102);
+        int numberOfItems = Random.Range(0, 3);
+        while (numberOfItems > 0)
+        {
+            numberOfItems--;
+            inventory.Add(gameManager.RollItem().id);   
+        }
     }
     void Update()
     {
@@ -26,6 +33,7 @@ public class Chest : MonoBehaviour, Interactable
     public void Interact()
     {
         if (emptied) return;
+        BuildInventory();
         Debug.Log("interacted chest");
         emptied = true;
         StartCoroutine("DropItems");
