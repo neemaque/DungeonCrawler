@@ -238,6 +238,8 @@ MonoBehaviour:
   - id: 101
     name: Wooden Sword
     description: A sword that's um wooden
+    rarity: 90
+    price: 0
     sprite: {fileID: 0}
     damage: 3
     range: 0.5
@@ -247,17 +249,136 @@ MonoBehaviour:
   - id: 102
     name: Rusty Axe
     description: Yerp that's an axe
+    rarity: 50
+    price: 0
     sprite: {fileID: 0}
     damage: 10
     range: 0.5
     knockback: 10
     preWait: 0.5
     postWait: 1
-  foodItems: []
+  - id: 103
+    name: Baseball Bat
+    description: Edgy
+    rarity: 90
+    price: 0
+    sprite: {fileID: 0}
+    damage: 5
+    range: 0.5
+    knockback: 10
+    preWait: 0.5
+    postWait: 1
+  foodItems:
+  - id: 501
+    name: Apple
+    description: 
+    rarity: 90
+    price: 10
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 502
+    name: Bread
+    description: 
+    rarity: 90
+    price: 15
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 503
+    name: Donut
+    description: 
+    rarity: 30
+    price: 30
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 504
+    name: Burger
+    description: 
+    rarity: 30
+    price: 50
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 505
+    name: Golden Apple
+    description: 
+    rarity: 5
+    price: 150
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 506
+    name: Cheese Pizza
+    description: 
+    rarity: 30
+    price: 70
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 507
+    name: Pineapple Pizza
+    description: 
+    rarity: 10
+    price: 75
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 508
+    name: Vanilla Ice Cream
+    description: 
+    rarity: 40
+    price: 30
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 505
+    name: Golden Apple
+    description: 
+    rarity: 5
+    price: 150
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 505
+    name: Golden Apple
+    description: 
+    rarity: 5
+    price: 150
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 505
+    name: Golden Apple
+    description: 
+    rarity: 5
+    price: 150
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 512
+    name: Instant Noodles
+    description: 
+    rarity: 50
+    price: 30
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
+  - id: 513
+    name: Tangerine
+    description: 
+    rarity: 50
+    price: 10
+    sprite: {fileID: 0}
+    saturation: 0
+    isBakedGood: 0
   miscItems:
   - id: 1
     name: Coins
     description: Money
+    rarity: 100
+    price: 0
     sprite: {fileID: 0}
   npcs:
   - id: 1
@@ -1604,6 +1725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f02945fb80e2c7a4984f8c6f6cebead8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  NPCLimit: 10
   wallPrefab: {fileID: 9070397969361713009, guid: 1f802c8a5f7970d49ac5f21e0ae10be5, type: 3}
   doorPrefab: {fileID: 9070397969361713009, guid: 6be2165ed8e888e428bbdaac9f213d9c, type: 3}
   chestPrefab: {fileID: 9070397969361713009, guid: 09c48dcb3212ca34fae67bb73e4483f3, type: 3}
@@ -1661,6 +1783,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1440550148
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3046285961597997886, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_Name
+      value: ItemPointer
+      objectReference: {fileID: 0}
+    - target: {fileID: 3046285961597997886, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -26.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8908006675423282378, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 441dea041b2f59b498505b97db5141d6, type: 3}
 --- !u!1 &1652055684
 GameObject:
   m_ObjectHideFlags: 0
@@ -2028,11 +2211,14 @@ MonoBehaviour:
   droppedItemPrefab: {fileID: 5626099447580491354, guid: e8bdbabe95215e641ad32cd6b9064d95, type: 3}
   inventory: 
   healthSlider: {fileID: 124618450}
+  saturationSlider: {fileID: 992685073}
   coinText: {fileID: 431450642}
   moveSpeed: 6
   coins: 0
   health: 20
   maxHealth: 20
+  saturation: 20
+  busy: 0
 --- !u!4 &1763872357
 Transform:
   m_ObjectHideFlags: 0
@@ -2265,3 +2451,4 @@ SceneRoots:
   - {fileID: 1652055688}
   - {fileID: 638953823}
   - {fileID: 751653592}
+  - {fileID: 1440550148}

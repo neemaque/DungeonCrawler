@@ -5,8 +5,16 @@ using System.Collections.Generic;
 public class Trader : MonoBehaviour, Interactable
 {
     private GameManager gameManager;
+    private Player player;
+    public string type;
     private List<int> tradingItemIds;
     private bool generated = false;
+    public GameObject droppedItemPrefab;
+    public GameObject tradingUI;
+    public Text[] tradingItemTexts;
+    public Image[] tradingItemImages;
+    public Button[] tradingButtons;
+    public Text[] tradingButtonTexts;
 
     public struct Trade
     {
@@ -19,11 +27,18 @@ public class Trader : MonoBehaviour, Interactable
     private void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-
+        player = GameObject.Find("Player").GetComponent<Player>();
+        for (int i = 0; i < tradingButtons.Length; i++)
+        {
+            int index = i;
+            tradingButtons[i].onClick.AddListener(() => OnButtonPressed(index));
+        }
     }
     public void Interact()
     {
         if (!generated) BuildTrades();
+        tradingUI.SetActive(true);
+        player.busy = true;
         for (int i = 0; i < 4; i++)
         {
             Debug.Log(trades[i].tradeItem.id + " " + trades[i].tradePrice);
@@ -31,10 +46,11 @@ public class Trader : MonoBehaviour, Interactable
     }
     public void BuildTrades()
     {
+        tradingItemIds = gameManager.GetItemIds(type);
+
         generated = true;
-        tradingItemIds = new List<int> { 501, 502, 503, 504, 505 };
-        trades = new Trade[16];
-        for (int i = 0; i < 2; i++)
+        trades = new Trade[10];
+        for (int i = 0; i < 5; i++)
         {
             Item item = gameManager.RollItemWithIDs(tradingItemIds);
             tradingItemIds.Remove(item.id);
@@ -46,8 +62,11 @@ public class Trader : MonoBehaviour, Interactable
                 buying = false
             };
             trades[i] = trade;
+
+            tradingItemTexts[i].text = item.name;
+            tradingButtonTexts[i].text = price.ToString();
         }
-        for (int i = 2; i < 4; i++)
+        for (int i = 5; i < 10; i++)
         {
             Item item = gameManager.RollItemWithIDs(tradingItemIds);
             tradingItemIds.Remove(item.id);
@@ -59,6 +78,40 @@ public class Trader : MonoBehaviour, Interactable
                 buying = true
             };
             trades[i] = trade;
+
+            tradingItemTexts[i].text = item.name;
+            tradingButtonTexts[i].text = price.ToString();
         }
+    }
+    private void OnButtonPressed(int index)
+    {
+        if (index < 5)
+        {
+            if (player.coins >= trades[index].tradePrice)
+            {
+                GameObject droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
+                droppedItem.GetComponent<DroppedItem>().Initialize(trades[index].tradeItem.id);
+                player.UpdateCoin(-1 * trades[index].tradePrice);
+                closeTrading();
+            }
+        }
+        else
+        {
+            for (int i = 0; i < player.inventory.Length; i++)
+            {
+                if (player.inventory[i] == trades[index].tradeItem.id)
+                {
+                    player.UpdateCoin(trades[index].tradePrice);
+                    player.DeleteItem(i);
+                    closeTrading();
+                    break;
+                }
+            }
+        }
+    }
+    public void closeTrading()
+    {
+        player.busy = false;
+        tradingUI.SetActive(false);
     }
 }

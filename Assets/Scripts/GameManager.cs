@@ -24,6 +24,39 @@ public class GameManager : MonoBehaviour
             items.Add(x);
         }
     }
+    public List<int> GetItemIds(string type)
+    {
+        List<int> ids = new List<int>();
+        if (type == "all" || type == "")
+        {
+            foreach (Item x in items)
+            {
+                ids.Add(x.id);
+            }
+        }
+        else if (type == "weapons")
+        {
+            foreach (Item x in weaponItems)
+            {
+                ids.Add(x.id);
+            }
+        }
+        else if (type == "foods")
+        {
+            foreach (Item x in foodItems)
+            {
+                ids.Add(x.id);
+            }
+        }
+        else if (type == "bakery")
+        {
+            foreach (FoodItem x in foodItems)
+            {
+                if (x.isBakedGood) ids.Add(x.id);
+            }
+        }
+        return ids;
+    }
     public Item RollItem()
     {
         int totalWeight = 0;
@@ -109,6 +142,7 @@ public class WeaponItem : Item
 public class FoodItem : Item
 {
     public int saturation;
+    public bool isBakedGood;
     public override string toString()
     {
         return name + "\n " + description + "\nSaturation: " + saturation;

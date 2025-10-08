@@ -25,6 +25,7 @@ public class Player : MonoBehaviour, IDamageable
     public int maxHealth = 20;
     public int saturation = 20;
     private bool canAttack = true;
+    public bool busy = false;
 
     void Awake()
     {
@@ -129,7 +130,7 @@ public class Player : MonoBehaviour, IDamageable
 
         if (Input.GetMouseButtonDown(1))
         {
-            if (interactable != null)
+            if (interactable != null && !busy)
             {
                 interactable.Interact();
             }
@@ -267,6 +268,11 @@ public class Player : MonoBehaviour, IDamageable
         GameObject droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
         droppedItem.GetComponent<DroppedItem>().Initialize(inventory[selectedSlot]);
         inventory[selectedSlot] = 0;
+        SelectSlot(selectedSlot);
+    }
+    public void DeleteItem(int slot)
+    {
+        inventory[slot] = 0;
         SelectSlot(selectedSlot);
     }
     IEnumerator HungerTimer()
