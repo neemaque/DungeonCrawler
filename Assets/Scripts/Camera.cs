@@ -26,6 +26,6 @@ public class MainCamera : MonoBehaviour
         {
             camera.orthographicSize = 50;
         }
-        else camera.orthographicSize = 10;
+        else camera.orthographicSize = 8;
     }
 }

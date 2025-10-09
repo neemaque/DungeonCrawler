@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private bool canAttack = true;
     private bool canMove = true;
     private bool dead = false;
-
+    
     void Awake()
     {
 
@@ -88,6 +88,15 @@ public class Enemy : MonoBehaviour, IDamageable
                     phase = "chase";
                     target = new Vector3(player.transform.position.x, player.transform.position.y, 0);
                     attention = attentionSpan;
+
+                    if(weapon.isRanged && canAttack && !dead)
+                    {
+                        Vector2 dir1 = (target - transform.position).normalized;
+                        LookAt(dir1);
+                        canAttack = false;
+                        Debug.Log("starting attack!");
+                        StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
+                    }
                 }
             }
         }
@@ -99,9 +108,8 @@ public class Enemy : MonoBehaviour, IDamageable
                 phase = "idle";
                 attention = 0;
             }
-            if (Vector2.Distance(target, transform.position) < weapon.range + 1 && canAttack)
+            if (Vector2.Distance(target, transform.position) < weapon.range + 1 && canAttack && !weapon.isRanged)
             {
-                Debug.Log("try attack");
                 StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
             }
         }
@@ -153,7 +161,16 @@ public class Enemy : MonoBehaviour, IDamageable
         canAttack = false;
         canMove = false;
         yield return new WaitForSeconds(preWait);
-        weapon.Attack(false);
+
+        if(weapon.isRanged)
+        {
+            Vector2 projDirection = new Vector2(target.x - transform.position.x, target.y - transform.position.y);
+            projDirection = projDirection.normalized;
+            
+            if(!dead)weapon.RangedAttack(projDirection);
+        }
+        else weapon.Attack(false);
+        
         canMove = true;
         yield return new WaitForSeconds(postWait/2);
         weapon.Reset();

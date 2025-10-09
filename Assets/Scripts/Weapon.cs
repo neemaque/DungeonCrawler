@@ -8,7 +8,10 @@ public class Weapon : MonoBehaviour
     public float knockback = 1f;
     public float preWait = 0.5f;
     public float postWait = 1f;
+    public bool isRanged = false;
+    public GameObject projectilePrefab;
     public Transform meshTransform;
+    public SpriteRenderer spriteRenderer;
     public GameObject mesh;
     public int facing;
     private LayerMask hitMask;
@@ -38,6 +41,8 @@ public class Weapon : MonoBehaviour
         knockback = weaponItem.knockback;
         preWait = weaponItem.preWait;
         postWait = weaponItem.postWait;
+        isRanged = weaponItem.isRanged;
+        spriteRenderer.sprite = weaponItem.sprite;
     }
     public void Update()
     {
@@ -45,6 +50,9 @@ public class Weapon : MonoBehaviour
         if (facing == 1) direction = new Vector2(1, 0);
         if (facing == 2) direction = new Vector2(0, 1);
         if (facing == 3) direction = new Vector2(0, -1);
+
+        if (facing == 1)spriteRenderer.flipX = false;
+        else spriteRenderer.flipX = true;
 
         transform.position = parent.position + (Vector3)direction / 2;
 
@@ -73,6 +81,16 @@ public class Weapon : MonoBehaviour
                 damageable.TakeDamage(damage, direction, knockback);
             }
         }
+    }
+    public void RangedAttack(Vector2 direction)
+    {
+        if (direction.x > 0) targetRotation = Quaternion.Euler(0, 0, -100);
+        else targetRotation = Quaternion.Euler(0, 0, 100);
+        rotationSpeed = 1000f;
+
+        Projectile projectile = Instantiate(projectilePrefab, new Vector3(transform.position.x + direction.x * 0.5f, transform.position.y + direction.y * 0.5f, transform.position.z), Quaternion.identity).GetComponent<Projectile>();
+        projectile.Shot(direction, 10f, damage, knockback, parent);
+        
     }
     public void Charge()
     {

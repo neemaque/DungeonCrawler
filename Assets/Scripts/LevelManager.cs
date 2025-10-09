@@ -346,7 +346,7 @@ public class LevelManager : MonoBehaviour
     private NPC SelectNPC()
     {
         List<NPC> npcs = gameManager.npcs;
-        int id = Random.Range(1,3);
+        int id = Random.Range(1,4);
         foreach (NPC x in npcs)
         {
             if (x.id == id)

@@ -11,10 +11,12 @@ public class Player : MonoBehaviour, IDamageable
     private GameObject itemPointer;
     private GameManager gameManager;
     public int[] inventory;
-    private int selectedSlot;
+    public int selectedSlot;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider saturationSlider;
     [SerializeField] private Text coinText;
+    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private Weapon weapon;
     public float moveSpeed = 10f;
     public int coins = 0;
@@ -39,6 +41,7 @@ public class Player : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         inventory = new int[10];
         inventory[2] = 101;
+        inventory[1] = 104;
 
         StartCoroutine(HungerTimer());
 
@@ -73,7 +76,7 @@ public class Player : MonoBehaviour, IDamageable
 
         SelectSlot(selectedSlot);
     }
-    void SelectSlot(int slot)
+    public void SelectSlot(int slot)
     {
         Debug.Log("selecting slot " + slot);
         selectedSlot = slot;
@@ -159,9 +162,20 @@ public class Player : MonoBehaviour, IDamageable
             moveInput.x -= 1;
             //facing = 0;
         }
-        if (Input.GetMouseButtonDown(0) && inventory[selectedSlot] / 100 == 1)
+        if (Input.GetMouseButtonDown(0) && !busy)
         {
-            if (canAttack) StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
+            if (canAttack && inventory[selectedSlot] / 100 == 1) StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
+            else if(inventory[selectedSlot] / 100 == 5)
+            {
+                foreach (FoodItem x in gameManager.foodItems)
+                {
+                    if (x.id == inventory[selectedSlot])
+                    {
+                        Eat(x.saturation);
+                    }
+                }
+                DeleteItem(selectedSlot);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -222,6 +236,26 @@ public class Player : MonoBehaviour, IDamageable
             if (y < 0) facing = 3;
             else facing = 2;
         }
+        if (facing == 0)
+        {
+            spriteRenderer.sprite = sprites[0];
+            spriteRenderer.flipX = true;
+        }
+        if (facing == 1)
+        {
+            spriteRenderer.sprite = sprites[0];
+            spriteRenderer.flipX = false;
+        }
+        if (facing == 2)
+        {
+            spriteRenderer.sprite = sprites[1];
+            spriteRenderer.flipX = false;
+        }
+        if (facing == 3)
+        {
+            spriteRenderer.sprite = sprites[2];
+            spriteRenderer.flipX = false;
+        }
     }
     public void TakeDamage(int amount, Vector2 direction, float knockback)
     {
@@ -238,7 +272,18 @@ public class Player : MonoBehaviour, IDamageable
         weapon.Charge();
         canAttack = false;
         yield return new WaitForSeconds(preWait);
-        weapon.Attack(true);
+        
+        if(weapon.isRanged)
+        {
+            Vector2 mousePos = new Vector2();
+            if (Input.mousePosition.x < 10000) mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+            Vector2 projDirection = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+            projDirection = projDirection.normalized;
+            
+            weapon.RangedAttack(projDirection);
+        }
+        else weapon.Attack(true);
+        
         yield return new WaitForSeconds(postWait);
         weapon.Reset();
         canAttack = true;
@@ -279,7 +324,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         while (true)
         {
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(20f);
             if (saturation > 10)
             {
                 int rand = Random.Range(0, 3);
@@ -299,5 +344,10 @@ public class Player : MonoBehaviour, IDamageable
             saturation = Mathf.Max(saturation - 1, 0);
             saturationSlider.value = (float)saturation / 20f;
         }
+    }
+    public void Eat(int amount)
+    {
+        saturation = Mathf.Min(20, saturation + amount);
+        saturationSlider.value = (float)saturation / 20f;
     }
 }

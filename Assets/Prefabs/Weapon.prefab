@@ -110,7 +110,10 @@ MonoBehaviour:
   knockback: 15
   preWait: 0.5
   postWait: 1
+  isRanged: 0
+  projectilePrefab: {fileID: 1969591769336299191, guid: bed91a35d724f1c40a9eb6305c0ebe0e, type: 3}
   meshTransform: {fileID: 3181141991922783465}
+  spriteRenderer: {fileID: 6974360529933443304}
   mesh: {fileID: 4614019360091460140}
   facing: 0
   parent: {fileID: 0}
@@ -141,8 +144,8 @@ Transform:
   m_GameObject: {fileID: 4614019360091460140}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
-  m_LocalScale: {x: 0.2, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7817777702157269729}
@@ -194,7 +197,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -8276234610682436239, guid: 78054457dfcbb8843b53fc1b49b75efb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

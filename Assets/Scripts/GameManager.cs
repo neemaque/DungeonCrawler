@@ -132,6 +132,7 @@ public class WeaponItem : Item
     public float knockback = 15f;
     public float preWait = 0.5f;
     public float postWait = 1f;
+    public bool isRanged = false;
     public override string toString()
     {
         return name + "\n " + description + "\nDamage: " + damage + "\nRange: " + range + "\nKnockback: " + knockback;
