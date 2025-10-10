@@ -1,3 +1,4 @@
+
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
@@ -35,6 +36,16 @@ public class Weapon : MonoBehaviour
         foreach (WeaponItem x in gameManager.weaponItems)
         {
             if (x.id == id) weaponItem = x;
+        }
+        if(pickedId / 100 != 1)
+        {
+            Item item = new Item();
+            foreach (Item x in gameManager.items)
+            {
+                if (x.id == id) item = x;
+            }
+            spriteRenderer.sprite = item.sprite;
+            return;
         }
         damage = weaponItem.damage;
         range = weaponItem.range;
@@ -109,11 +120,11 @@ public class Weapon : MonoBehaviour
     }
     public void Unhide()
     {
-        mesh.SetActive(true);
+        //mesh.SetActive(true);
     }
     public void Hide()
     {
-        mesh.SetActive(false);
+        //mesh.SetActive(false);
     }
 }
 public interface IDamageable

@@ -10,6 +10,13 @@ public class GameManager : MonoBehaviour
     public List<NPC> npcs;
     private void Awake()
     {
+        if (FindObjectsOfType<Player>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+
         items = new List<Item>();
         foreach (WeaponItem x in weaponItems)
         {
@@ -23,6 +30,14 @@ public class GameManager : MonoBehaviour
         {
             items.Add(x);
         }
+    }
+    public Item FindItem(int id)
+    {
+        foreach (Item x in items)
+        {
+            if (x.id == id) return x;
+        }
+        return null;
     }
     public List<int> GetItemIds(string type)
     {

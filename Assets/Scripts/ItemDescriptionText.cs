@@ -8,7 +8,7 @@ public class ItemDescriptionText : MonoBehaviour
     public void GetItem(string itemDescription)
     {
         text.text = itemDescription;
-        timer = 0.2f;
+        timer = 0.1f;
     }
     private void Update()
     {

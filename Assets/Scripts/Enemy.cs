@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
             inventory.Add(1);
         }
-        int rand = Random.Range(0, 1);
+        int rand = Random.Range(0, 3);
         if (rand == 0)
         {
             inventory.Add(weaponOfChoice);

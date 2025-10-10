@@ -11,6 +11,7 @@ public class Player : MonoBehaviour, IDamageable
     private GameObject itemPointer;
     private GameManager gameManager;
     public int[] inventory;
+    public int[] inventoryStacks;
     public int selectedSlot;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider saturationSlider;
@@ -28,6 +29,9 @@ public class Player : MonoBehaviour, IDamageable
     public int saturation = 20;
     private bool canAttack = true;
     public bool busy = false;
+    public bool inventoryOpen = false;
+    public int lastClickedSlot = -1;
+    private GameObject inventoryUI;
 
     void Awake()
     {
@@ -39,9 +43,12 @@ public class Player : MonoBehaviour, IDamageable
         DontDestroyOnLoad(gameObject);
 
         rb = GetComponent<Rigidbody2D>();
-        inventory = new int[10];
+        inventory = new int[25];
+        inventoryStacks = new int[25];
         inventory[2] = 101;
-        inventory[1] = 104;
+        inventoryStacks[2] = 1;
+        inventory[1] = 501;
+        inventoryStacks[1] = 3;
 
         StartCoroutine(HungerTimer());
 
@@ -71,14 +78,20 @@ public class Player : MonoBehaviour, IDamageable
 
         itemPointer = GameObject.Find("ItemPointer");
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        inventoryUI = GameObject.Find("InventoryUI");
+        inventoryUI.SetActive(false);
+        inventoryOpen = false;
+        busy = false;
+        lastClickedSlot = -1;
+
         if (itemPointer != null) itemPointer.SetActive(true);
-        Debug.Log(itemPointer);
 
         SelectSlot(selectedSlot);
     }
     public void SelectSlot(int slot)
     {
         Debug.Log("selecting slot " + slot);
+        Debug.Log("slot stack " + inventoryStacks[slot]);
         selectedSlot = slot;
         if (inventory[selectedSlot] / 100 == 1)
         {
@@ -88,6 +101,7 @@ public class Player : MonoBehaviour, IDamageable
         else
         {
             weapon.Hide();
+            weapon.Picked(inventory[selectedSlot]);
         }
     }
 
@@ -96,11 +110,6 @@ public class Player : MonoBehaviour, IDamageable
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(ReloadCoroutine());
-            StartLevel();
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            Debug.Log(gameManager.RollItem().id);
         }
 
         
@@ -165,7 +174,7 @@ public class Player : MonoBehaviour, IDamageable
         if (Input.GetMouseButtonDown(0) && !busy)
         {
             if (canAttack && inventory[selectedSlot] / 100 == 1) StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
-            else if(inventory[selectedSlot] / 100 == 5)
+            else if (inventory[selectedSlot] / 100 == 5 && saturation < 20)
             {
                 foreach (FoodItem x in gameManager.foodItems)
                 {
@@ -178,9 +187,27 @@ public class Player : MonoBehaviour, IDamageable
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            DropItem();
+            Debug.Log("inventory");
+            if (!inventoryOpen && !busy)
+            {
+                inventoryOpen = true;
+                busy = true;
+                inventoryUI.SetActive(true);
+            }
+            else if(inventoryOpen)
+            {
+                inventoryOpen = false;
+                busy = false;
+                inventoryUI.SetActive(false);
+                lastClickedSlot = -1;
+            }
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Q) && !busy)
+        {
+            DropItem(selectedSlot);
         }
         if (Input.GetKey(KeyCode.Alpha1))
         {
@@ -201,18 +228,6 @@ public class Player : MonoBehaviour, IDamageable
         if (Input.GetKey(KeyCode.Alpha5))
         {
             SelectSlot(4);
-        }
-        if (Input.GetKey(KeyCode.Alpha6))
-        {
-            SelectSlot(5);
-        }
-        if (Input.GetKey(KeyCode.Alpha7))
-        {
-            SelectSlot(6);
-        }
-        if (Input.GetKey(KeyCode.Alpha8))
-        {
-            SelectSlot(7);
         }
 
         weapon.facing = facing;
@@ -303,21 +318,51 @@ public class Player : MonoBehaviour, IDamageable
             UpdateCoin(amount);
             return;
         }
-        DropItem();
-        inventory[selectedSlot] = id;
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == id && inventoryStacks[i] < 16 && inventory[i] / 100 != 1)
+            {
+                inventoryStacks[i]++;
+                SelectSlot(selectedSlot);
+                return;
+            }
+        }
+        for (int i = 0; i < inventory.Length; i++)
+        {
+            if (inventory[i] == 0)
+            {
+                inventoryStacks[i] = 1;
+                inventory[i] = id;
+                SelectSlot(selectedSlot);
+                return;
+            }
+        }
+        DropStack(0);
+        inventoryStacks[0] = 1;
+        inventory[0] = id;
         SelectSlot(selectedSlot);
     }
-    public void DropItem()
+    public void DropItem(int slot)
     {
-        if (inventory[selectedSlot] == 0) return;
+        if (inventory[slot] == 0) return;
         GameObject droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
-        droppedItem.GetComponent<DroppedItem>().Initialize(inventory[selectedSlot]);
-        inventory[selectedSlot] = 0;
+        droppedItem.GetComponent<DroppedItem>().Initialize(inventory[slot]);
+        inventoryStacks[slot]--;
+        if (inventoryStacks[slot] == 0) inventory[slot] = 0;
         SelectSlot(selectedSlot);
+    }
+    public void DropStack(int slot)
+    {
+        while(inventory[slot] != 0)
+        {
+            DropItem(slot);
+        }
     }
     public void DeleteItem(int slot)
     {
-        inventory[slot] = 0;
+        if (inventory[slot] == 0) return;
+        inventoryStacks[slot]--;
+        if (inventoryStacks[slot] == 0) inventory[slot] = 0;
         SelectSlot(selectedSlot);
     }
     IEnumerator HungerTimer()
