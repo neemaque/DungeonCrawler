@@ -49,7 +49,7 @@ public class Chest : MonoBehaviour, Interactable
             GameObject droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
             droppedItem.GetComponent<DroppedItem>().Initialize(id);
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.01f);
         }
         gameObject.SetActive(false);
     }

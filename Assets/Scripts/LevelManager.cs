@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public GameObject doorPrefab;
     public GameObject chestPrefab;
     public GameObject exitPrefab;
+    public GameObject[] randomPrefabs;
     public GameObject enemyPrefab;
     private Player player;
     private GameManager gameManager;
@@ -44,6 +45,8 @@ public class LevelManager : MonoBehaviour
         AddChests(25, 25);
         used = new bool[100, 100];
         AddExit();
+        used = new bool[100, 100];
+        AddRandomThings(25, 25);
         used = new bool[100, 100];
         SpawnNPCS(25, 25);
     }
@@ -315,6 +318,29 @@ public class LevelManager : MonoBehaviour
         if (room.down == 1 && !used[x, y + 1]) FindExit(x, y + 1, depth + 1);
     }
 
+    private void AddRandomThings(int x, int y)
+    {
+        used[x, y] = true;
+        RoomConfig room = rooms[x, y].Value;
+        int numberOfThings = Random.Range(-5, 2);
+        while(numberOfThings > 0)
+        {
+            numberOfThings--;
+            if(x == 25 && y == 25)break;
+            Vector2 placement = AttemptPlace(1, 1, x, y);
+            if (placement.x == -1000) continue;
+            Vector3 pos = new Vector3((x - 25) * 8 + placement.x, (y - 25) * 8 + placement.y, 0);
+            int rand = Random.Range(0, randomPrefabs.Length);
+            Instantiate(randomPrefabs[rand], pos, Quaternion.identity);
+            taken[(int)pos.x + 500, (int)pos.y + 500] = true;
+        }
+
+        if (room.left == 1 && !used[x - 1, y]) AddRandomThings(x - 1, y);
+        if (room.right == 1 && !used[x + 1, y]) AddRandomThings(x + 1, y);
+        if (room.up == 1 && !used[x, y - 1]) AddRandomThings(x, y - 1);
+        if (room.down == 1 && !used[x, y + 1]) AddRandomThings(x, y + 1);
+    }
+    
     private void SpawnNPCS(int x, int y)
     {
         used[x, y] = true;

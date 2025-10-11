@@ -32,6 +32,7 @@ public class Player : MonoBehaviour, IDamageable
     public bool inventoryOpen = false;
     public int lastClickedSlot = -1;
     private GameObject inventoryUI;
+    public bool canMove = true;
 
     void Awake()
     {
@@ -235,7 +236,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     void FixedUpdate()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        if(canMove)rb.linearVelocity = moveInput * moveSpeed;
     }
     private void Turn(Vector3 mousePos)
     {
@@ -276,6 +277,20 @@ public class Player : MonoBehaviour, IDamageable
     {
         health -= amount;
         healthSlider.value = (float)health / (float)maxHealth;
+        StartCoroutine(DamageCooldown(direction, knockback));
+    }
+    IEnumerator DamageCooldown(Vector2 direction, float knockback)
+    {
+        canMove = false;
+        canAttack = false;
+        rb.linearVelocity = new Vector2(0, 0);
+        rb.AddForce(direction * knockback * 50);
+        spriteRenderer.color = new Color(1f, 0.8f, 0.8f, 1f);
+        float seconds = knockback / 50f;
+        yield return new WaitForSeconds(seconds);
+        canMove = true;
+        canAttack = true;
+        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
     }
     public void Heal(int amount)
     {
@@ -372,11 +387,7 @@ public class Player : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(20f);
             if (saturation > 10)
             {
-                int rand = Random.Range(0, 3);
-                if (rand > 0)
-                {
-                    Heal(1);
-                }
+                Heal(1);
             }
             else if (saturation == 0)
             {

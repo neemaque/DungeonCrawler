@@ -30,7 +30,7 @@ public class DroppedItem : MonoBehaviour, Interactable
         float dirx = Random.Range(-1f, 1f);
         float diry = Random.Range(-1f, 1f);
         Vector2 dir = new Vector2(dirx, diry);
-        float dropForce = Random.Range(300f, 500f);
+        float dropForce = Random.Range(150f, 250f);
         rb.AddForce(dir * dropForce);
     }
 
