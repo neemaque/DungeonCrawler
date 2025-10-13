@@ -32,6 +32,7 @@ public class Player : MonoBehaviour, IDamageable
     public bool inventoryOpen = false;
     public int lastClickedSlot = -1;
     private GameObject inventoryUI;
+    private bool canSwitchItems = true;
     public bool canMove = true;
 
     void Awake()
@@ -44,12 +45,23 @@ public class Player : MonoBehaviour, IDamageable
         DontDestroyOnLoad(gameObject);
 
         rb = GetComponent<Rigidbody2D>();
-        inventory = new int[25];
-        inventoryStacks = new int[25];
+        inventory = new int[28];
+        inventoryStacks = new int[28];
         inventory[2] = 101;
         inventoryStacks[2] = 1;
         inventory[1] = 501;
         inventoryStacks[1] = 3;
+        inventory[6] = 9;
+        inventoryStacks[6] = 3;
+        inventory[3] = 104;
+        inventoryStacks[3] = 1;
+
+        inventory[25] = 211;
+        inventoryStacks[25] = 1;
+        inventory[26] = 221;
+        inventoryStacks[26] = 1;
+        inventory[27] = 231;
+        inventoryStacks[27] = 1;
 
         StartCoroutine(HungerTimer());
 
@@ -210,23 +222,23 @@ public class Player : MonoBehaviour, IDamageable
         {
             DropItem(selectedSlot);
         }
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha1) && canSwitchItems)
         {
             SelectSlot(0);
         }
-        if (Input.GetKey(KeyCode.Alpha2))
+        if (Input.GetKey(KeyCode.Alpha2) && canSwitchItems)
         {
             SelectSlot(1);
         }
-        if (Input.GetKey(KeyCode.Alpha3))
+        if (Input.GetKey(KeyCode.Alpha3) && canSwitchItems)
         {
             SelectSlot(2);
         }
-        if (Input.GetKey(KeyCode.Alpha4))
+        if (Input.GetKey(KeyCode.Alpha4) && canSwitchItems)
         {
             SelectSlot(3);
         }
-        if (Input.GetKey(KeyCode.Alpha5))
+        if (Input.GetKey(KeyCode.Alpha5) && canSwitchItems)
         {
             SelectSlot(4);
         }
@@ -275,7 +287,10 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void TakeDamage(int amount, Vector2 direction, float knockback)
     {
-        health -= amount;
+        int protection = gameManager.GetProtection(inventory[25]) + gameManager.GetProtection(inventory[26]) + gameManager.GetProtection(inventory[27]);
+        float actualDamage = (float)amount - (float)amount * 0.6f * ((float)protection / 100f);
+        Debug.Log("actual damage " + actualDamage);
+        health -= Mathf.RoundToInt(actualDamage);
         healthSlider.value = (float)health / (float)maxHealth;
         StartCoroutine(DamageCooldown(direction, knockback));
     }
@@ -301,22 +316,43 @@ public class Player : MonoBehaviour, IDamageable
     {
         weapon.Charge();
         canAttack = false;
+        canSwitchItems = false;
+    
         yield return new WaitForSeconds(preWait);
         
         if(weapon.isRanged)
         {
-            Vector2 mousePos = new Vector2();
-            if (Input.mousePosition.x < 10000) mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
-            Vector2 projDirection = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
-            projDirection = projDirection.normalized;
+            bool hasArrows = false;
+            if(weapon.id == 104) hasArrows = true;
+            else
+            {
+                for(int i=0;i<inventory.Length;i++)
+                {
+                    if(inventory[i] == 9)
+                    {
+                        hasArrows = true;
+                        DeleteItem(i);
+                        break;
+                    }
+                }
+            }
             
-            weapon.RangedAttack(projDirection);
+            if(hasArrows)
+            {
+                Vector2 mousePos = new Vector2();
+                if (Input.mousePosition.x < 10000) mousePos = Camera.main.ScreenToWorldPoint(new Vector2(Input.mousePosition.x, Input.mousePosition.y));
+                Vector2 projDirection = new Vector2(mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+                projDirection = projDirection.normalized;
+                weapon.RangedAttack(projDirection);
+            }
+            
         }
         else weapon.Attack(true);
         
         yield return new WaitForSeconds(postWait);
         weapon.Reset();
         canAttack = true;
+        canSwitchItems = true;
     }
     public void UpdateCoin(int amount)
     {

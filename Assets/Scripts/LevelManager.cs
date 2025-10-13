@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public GameObject doorPrefab;
     public GameObject chestPrefab;
     public GameObject exitPrefab;
+    public GameObject[] specialRooms;
     public GameObject[] randomPrefabs;
     public GameObject enemyPrefab;
     private Player player;
@@ -45,6 +46,8 @@ public class LevelManager : MonoBehaviour
         AddChests(25, 25);
         used = new bool[100, 100];
         AddExit();
+        used = new bool[100, 100];
+        AddSpecial(25, 25);
         used = new bool[100, 100];
         AddRandomThings(25, 25);
         used = new bool[100, 100];
@@ -217,7 +220,7 @@ public class LevelManager : MonoBehaviour
     {
         used[x, y] = true;
         RoomConfig room = rooms[x, y].Value;
-        int numberOfChests = Random.Range(-5, 3);
+        int numberOfChests = Random.Range(-7, 3);
         if (room.locked) numberOfChests++;
 
         bool[,] chested = new bool[8, 8];
@@ -317,12 +320,50 @@ public class LevelManager : MonoBehaviour
         if (room.up == 1 && !used[x, y - 1]) FindExit(x, y - 1, depth + 1);
         if (room.down == 1 && !used[x, y + 1]) FindExit(x, y + 1, depth + 1);
     }
+    private void AddSpecial(int x, int y)
+    {
+        RoomConfig room = rooms[x, y].Value;
+        used[x, y] = true;
+        int isSpecial = Random.Range(-40, 2);
+        if(isSpecial > 0)
+        {
+            Vector2 placement = AttemptPlace(4, 4, x, y);
+            if (placement.x == -1000 || x == 25 && y == 25) 
+            {
+                if (room.left == 1 && !used[x - 1, y]) AddSpecial(x - 1, y);
+                if (room.right == 1 && !used[x + 1, y]) AddSpecial(x + 1, y);
+                if (room.up == 1 && !used[x, y - 1]) AddSpecial(x, y - 1);
+                if (room.down == 1 && !used[x, y + 1]) AddSpecial(x, y + 1);
+                return;
+            }
+            Vector3 pos = new Vector3((x - 25) * 8 + placement.x, (y - 25) * 8 + placement.y, 0);
+            Debug.Log("placing at " + pos);
+            int rand = Random.Range(0, specialRooms.Length);
+            Instantiate(specialRooms[rand], pos, Quaternion.identity);
+            taken[(int)pos.x + 500, (int)pos.y + 500] = true;
 
+            for (int ii = (int)placement.x; ii < (int)placement.x + 4; ii++)
+            {
+                for (int jj = (int)placement.y; jj > (int)placement.y - 4; jj--)
+                {
+
+                    int xx = (x - 25) * 8 + ii;
+                    int yy = (y - 25) * 8 + jj;
+                    Debug.Log("taking " + xx + " " + yy);
+                    taken[xx + 500, yy + 500] = true;
+                }
+            }
+        }
+        if (room.left == 1 && !used[x - 1, y]) AddSpecial(x - 1, y);
+        if (room.right == 1 && !used[x + 1, y]) AddSpecial(x + 1, y);
+        if (room.up == 1 && !used[x, y - 1]) AddSpecial(x, y - 1);
+        if (room.down == 1 && !used[x, y + 1]) AddSpecial(x, y + 1);
+    }
     private void AddRandomThings(int x, int y)
     {
         used[x, y] = true;
         RoomConfig room = rooms[x, y].Value;
-        int numberOfThings = Random.Range(-5, 2);
+        int numberOfThings = Random.Range(-4, 3);
         while(numberOfThings > 0)
         {
             numberOfThings--;
@@ -332,7 +373,7 @@ public class LevelManager : MonoBehaviour
             Vector3 pos = new Vector3((x - 25) * 8 + placement.x, (y - 25) * 8 + placement.y, 0);
             int rand = Random.Range(0, randomPrefabs.Length);
             Instantiate(randomPrefabs[rand], pos, Quaternion.identity);
-            taken[(int)pos.x + 500, (int)pos.y + 500] = true;
+            //taken[(int)pos.x + 500, (int)pos.y + 500] = true;
         }
 
         if (room.left == 1 && !used[x - 1, y]) AddRandomThings(x - 1, y);
@@ -394,7 +435,7 @@ public class LevelManager : MonoBehaviour
             bool ok = true;
             for (int ii = i; ii < i + height; ii++)
             {
-                for (int jj = j; jj < j + width; jj++)
+                for (int jj = j; jj > j - width; jj--)
                 {
                     int xx = (x - 25) * 8 + ii;
                     int yy = (y - 25) * 8 + jj;

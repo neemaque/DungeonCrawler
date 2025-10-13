@@ -51,15 +51,24 @@ public class InventorySlotUI : MonoBehaviour
         }
         else
         {
-            int cacheId = player.inventory[player.lastClickedSlot];
-            int cacheStack = player.inventoryStacks[player.lastClickedSlot];
-            player.inventory[player.lastClickedSlot] = itemID;
-            player.inventoryStacks[player.lastClickedSlot] = player.inventoryStacks[slot];
-            player.inventory[slot] = cacheId;
-            player.inventoryStacks[slot] = cacheStack;
-            player.SelectSlot(player.selectedSlot);
-            player.lastClickedSlot = -1;
+            SwapSlots();
         }
+    }
+    public void SwapSlots()
+    {
+        if(slot > 24 && player.inventory[player.lastClickedSlot] / 10 != slot - 4 && player.inventory[player.lastClickedSlot] != 0 || player.lastClickedSlot > 24 && player.inventory[slot] / 10 != player.lastClickedSlot - 4 && player.inventory[slot] != 0)
+        {
+            player.lastClickedSlot = -1;
+            return;
+        }
+        int cacheId = player.inventory[player.lastClickedSlot];
+        int cacheStack = player.inventoryStacks[player.lastClickedSlot];
+        player.inventory[player.lastClickedSlot] = itemID;
+        player.inventoryStacks[player.lastClickedSlot] = player.inventoryStacks[slot];
+        player.inventory[slot] = cacheId;
+        player.inventoryStacks[slot] = cacheStack;
+        player.SelectSlot(player.selectedSlot);
+        player.lastClickedSlot = -1;
     }
     public void Hover()
     {

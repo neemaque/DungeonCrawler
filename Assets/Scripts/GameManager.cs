@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public List<Item> items;
     public List<WeaponItem> weaponItems;
+    public List<ArmorItem> armorItems;
     public List<FoodItem> foodItems;
     public List<MiscItem> miscItems;
     public List<NPC> npcs;
@@ -19,6 +20,10 @@ public class GameManager : MonoBehaviour
 
         items = new List<Item>();
         foreach (WeaponItem x in weaponItems)
+        {
+            items.Add(x);
+        }
+        foreach (ArmorItem x in armorItems)
         {
             items.Add(x);
         }
@@ -122,6 +127,48 @@ public class GameManager : MonoBehaviour
         }
         return items[0];
     }
+    public NPC RollNPCWithIDs(List<int> ids)
+    {
+        List<NPC> listOfNPCs = new List<NPC>();
+        foreach (int id in ids)
+        {
+            foreach (NPC x in npcs)
+            {
+                if (x.id == id)
+                {
+                    listOfNPCs.Add(x);
+                    break;
+                }
+            }
+        }
+        int totalWeight = 0;
+        foreach (NPC x in listOfNPCs)
+        {
+            totalWeight += x.rarity;
+        }
+        int rand = Random.Range(0, totalWeight + 1);
+
+        foreach (NPC x in listOfNPCs)
+        {
+            if (rand < x.rarity)
+            {
+                return x;
+            }
+            rand -= x.rarity;
+        }
+        return npcs[0];
+    }
+    public int GetProtection(int id)
+    {
+        foreach(ArmorItem x in armorItems)
+        {
+            if(x.id == id)
+            {
+                return x.protection;
+            }
+        }
+        return 0;
+    }
 }
 
 [System.Serializable]
@@ -155,6 +202,16 @@ public class WeaponItem : Item
 }
 
 [System.Serializable]
+public class ArmorItem : Item
+{
+    public int protection;
+    public override string toString()
+    {
+        return name + "\n " + description + "\nProtection: " + protection;
+    }
+}
+
+[System.Serializable]
 public class FoodItem : Item
 {
     public int saturation;
@@ -180,6 +237,7 @@ public class NPC
     public int id;
     public string name;
     public string description;
+    public int rarity = 10;
     public int maxHealth = 20;
     public float moveSpeed = 3f;
     public int weaponOfChoice = 101;

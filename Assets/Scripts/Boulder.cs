@@ -25,6 +25,7 @@ public class Boulder : MonoBehaviour
             damageable.TakeDamage(20, dir, 50f);
             Debug.Log("damaged with boulder!");
             speed = Mathf.Max(0, speed - 1f);
+            if(speed == 0)moving = false;
         }
         else moving = false;
     }

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca9d5ec1c16ffb4b8d609648391414a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
+  itemSprite: {fileID: 1385451747126314047}
 --- !u!50 &8863066742201206354
 Rigidbody2D:
   serializedVersion: 5

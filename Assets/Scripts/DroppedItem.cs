@@ -5,6 +5,7 @@ public class DroppedItem : MonoBehaviour, Interactable
     private GameObject player;
     private GameManager gameManager;
     private ItemDescriptionText itemDescriptionText;
+    public SpriteRenderer itemSprite;
     private Rigidbody2D rb;
     private int id;
     private Item item;
@@ -26,7 +27,7 @@ public class DroppedItem : MonoBehaviour, Interactable
                 item = x;
             }
         }
-
+        itemSprite.sprite = item.sprite;
         float dirx = Random.Range(-1f, 1f);
         float diry = Random.Range(-1f, 1f);
         Vector2 dir = new Vector2(dirx, diry);
