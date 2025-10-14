@@ -363,7 +363,7 @@ public class LevelManager : MonoBehaviour
     {
         used[x, y] = true;
         RoomConfig room = rooms[x, y].Value;
-        int numberOfThings = Random.Range(-4, 3);
+        int numberOfThings = Random.Range(-3, 4);
         while(numberOfThings > 0)
         {
             numberOfThings--;

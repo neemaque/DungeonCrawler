@@ -73,7 +73,7 @@ public class Weapon : MonoBehaviour
             rotationSpeed * Time.deltaTime
         );
     }
-    public void Attack(bool isPlayer)
+    public void Attack(bool isPlayer, float strengthMultiplier)
     {
         if (direction.x > 0) targetRotation = Quaternion.Euler(0, 0, -100);
         else targetRotation = Quaternion.Euler(0, 0, 100);
@@ -89,7 +89,7 @@ public class Weapon : MonoBehaviour
             if (damageable != null)
             {
                 if (hit.transform == parent) continue;
-                damageable.TakeDamage(damage, direction, knockback);
+                damageable.TakeDamage((int)(damage * strengthMultiplier), direction, knockback);
             }
         }
     }

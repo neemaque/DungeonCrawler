@@ -169,7 +169,7 @@ public class Enemy : MonoBehaviour, IDamageable
             
             if(!dead)weapon.RangedAttack(projDirection);
         }
-        else weapon.Attack(false);
+        else weapon.Attack(false, 1f);
         
         canMove = true;
         yield return new WaitForSeconds(postWait/2);

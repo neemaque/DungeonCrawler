@@ -34,6 +34,10 @@ public class Player : MonoBehaviour, IDamageable
     private GameObject inventoryUI;
     private bool canSwitchItems = true;
     public bool canMove = true;
+    private float speedMultiplier = 1f;
+    private float strengthMultiplier = 1f;
+    [SerializeField] private GameObject globalLight;
+    [SerializeField] private GameObject pauseUI;
 
     void Awake()
     {
@@ -56,12 +60,16 @@ public class Player : MonoBehaviour, IDamageable
         inventory[3] = 104;
         inventoryStacks[3] = 1;
 
-        inventory[25] = 211;
-        inventoryStacks[25] = 1;
-        inventory[26] = 221;
-        inventoryStacks[26] = 1;
-        inventory[27] = 231;
-        inventoryStacks[27] = 1;
+        
+        inventory[10] = 10;
+        inventoryStacks[10] = 1;
+        inventory[11] = 11;
+        inventoryStacks[11] = 1;
+        inventory[12] = 12;
+        inventoryStacks[12] = 1;
+        inventory[13] = 13;
+        inventoryStacks[13] = 1;
+        
 
         StartCoroutine(HungerTimer());
 
@@ -124,7 +132,10 @@ public class Player : MonoBehaviour, IDamageable
         {
             StartCoroutine(ReloadCoroutine());
         }
-
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
         
         Vector3 mousePos = new Vector3();
         if (Input.mousePosition.x < 10000) mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f));
@@ -187,17 +198,7 @@ public class Player : MonoBehaviour, IDamageable
         if (Input.GetMouseButtonDown(0) && !busy)
         {
             if (canAttack && inventory[selectedSlot] / 100 == 1) StartCoroutine(AttackTime(weapon.preWait, weapon.postWait));
-            else if (inventory[selectedSlot] / 100 == 5 && saturation < 20)
-            {
-                foreach (FoodItem x in gameManager.foodItems)
-                {
-                    if (x.id == inventory[selectedSlot])
-                    {
-                        Eat(x.saturation);
-                    }
-                }
-                DeleteItem(selectedSlot);
-            }
+            else Use(selectedSlot);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -248,7 +249,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     void FixedUpdate()
     {
-        if(canMove)rb.linearVelocity = moveInput * moveSpeed;
+        if(canMove)rb.linearVelocity = moveInput * moveSpeed * speedMultiplier;
     }
     private void Turn(Vector3 mousePos)
     {
@@ -347,12 +348,70 @@ public class Player : MonoBehaviour, IDamageable
             }
             
         }
-        else weapon.Attack(true);
+        else weapon.Attack(true, strengthMultiplier);
         
         yield return new WaitForSeconds(postWait);
         weapon.Reset();
         canAttack = true;
         canSwitchItems = true;
+    }
+    public void Use(int slot)
+    {
+        if (inventory[slot] / 100 == 5 && saturation < 20)
+        {
+            foreach (FoodItem x in gameManager.foodItems)
+            {
+                if (x.id == inventory[slot])
+                {
+                    Eat(x.saturation);
+                }
+            }
+            DeleteItem(slot);
+        }
+        else if(inventory[slot] == 10)
+        {
+            Heal(15);
+            DeleteItem(slot);
+        }
+        else if(inventory[slot] == 11)
+        {
+            if(speedMultiplier == 1f)
+            {
+                StartCoroutine(SpeedPotionTimer());
+            }
+            DeleteItem(slot);
+        }
+        else if(inventory[slot] == 12)
+        {
+            if(strengthMultiplier == 1f)
+            {
+                StartCoroutine(StrengthPotionTimer());
+            }
+            DeleteItem(slot);
+        }
+        else if(inventory[slot] == 13)
+        {
+            StartCoroutine(DandelionPotion());
+            DeleteItem(slot);
+        }
+    }
+    IEnumerator SpeedPotionTimer()
+    {
+        speedMultiplier = 1.5f;
+        yield return new WaitForSeconds(120f);
+        speedMultiplier = 1f;
+    }
+    IEnumerator StrengthPotionTimer()
+    {
+        strengthMultiplier = 2f;
+        yield return new WaitForSeconds(120f);
+        strengthMultiplier = 1f;
+    }
+    IEnumerator DandelionPotion()
+    {
+        globalLight.SetActive(true);
+        yield return new WaitForSeconds(120f);
+        globalLight.SetActive(false);
     }
     public void UpdateCoin(int amount)
     {
@@ -371,11 +430,14 @@ public class Player : MonoBehaviour, IDamageable
         }
         for (int i = 0; i < inventory.Length; i++)
         {
-            if (inventory[i] == id && inventoryStacks[i] < 16 && inventory[i] / 100 != 1)
+            if (inventory[i] == id && inventoryStacks[i] < 16 )
             {
-                inventoryStacks[i]++;
-                SelectSlot(selectedSlot);
-                return;
+                if(inventory[i] / 100 == 5 || inventory[i] == 9)
+                {
+                    inventoryStacks[i]++;
+                    SelectSlot(selectedSlot);
+                    return;
+                }
             }
         }
         for (int i = 0; i < inventory.Length; i++)
@@ -441,5 +503,19 @@ public class Player : MonoBehaviour, IDamageable
     {
         saturation = Mathf.Min(20, saturation + amount);
         saturationSlider.value = (float)saturation / 20f;
+    }
+    public void PauseGame()
+    {
+        Time.timeScale = 0f;
+        pauseUI.SetActive(true);
+    }
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1f;
+        pauseUI.SetActive(false);
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
