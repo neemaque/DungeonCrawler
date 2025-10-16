@@ -396,7 +396,7 @@ public class LevelManager : MonoBehaviour
                 Vector2 placement = AttemptPlace(1, 1, x, y);
                 if (placement.x == -1000) continue;
                 Vector3 pos = new Vector3((x - 25) * 8 + placement.x, (y - 25) * 8 + placement.y, 0);
-                GameObject npcObject = Instantiate(enemyPrefab, pos, Quaternion.identity);
+                GameObject npcObject = Instantiate(npc.prefab, pos + new Vector3(0.5f, -0.5f, 0), Quaternion.identity);
                 npcObject.GetComponent<Enemy>().Initialize(npc);
                 totalNPCs++;
                 
@@ -412,16 +412,7 @@ public class LevelManager : MonoBehaviour
     }
     private NPC SelectNPC()
     {
-        List<NPC> npcs = gameManager.npcs;
-        int id = Random.Range(1,4);
-        foreach (NPC x in npcs)
-        {
-            if (x.id == id)
-            {
-                return x;
-            }
-        }
-        return null;
+        return gameManager.SpawnNPCPick();
     }
     private Vector2 AttemptPlace(int width, int height, int x, int y)
     {

@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public GameObject droppedItemPrefab;
     [SerializeField] private Text nameText;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private List<int> inventory;
     private Weapon weapon;
     private GameObject player;
@@ -35,7 +37,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         rb = GetComponent<Rigidbody2D>();
         phase = "idle";
-
+        facing = 1;
         health = maxHealth;
         player = GameObject.Find("Player");
     }
@@ -154,6 +156,26 @@ public class Enemy : MonoBehaviour, IDamageable
             if (dir.y > 0) facing = 2;
             else facing = 3;
         }
+        if (facing == 0)
+        {
+            spriteRenderer.sprite = sprites[0];
+            spriteRenderer.flipX = true;
+        }
+        if (facing == 1)
+        {
+            spriteRenderer.sprite = sprites[0];
+            spriteRenderer.flipX = false;
+        }
+        if (facing == 2)
+        {
+            spriteRenderer.sprite = sprites[1];
+            spriteRenderer.flipX = false;
+        }
+        if (facing == 3)
+        {
+            spriteRenderer.sprite = sprites[2];
+            spriteRenderer.flipX = false;
+        }
     }
     IEnumerator AttackTime(float preWait, float postWait)
     {
@@ -181,11 +203,13 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         canMove = false;
         canAttack = false;
+        spriteRenderer.color = new Color(1f, 0.5f, 0.5f, 1f);
         rb.linearVelocity = new Vector2(0, 0);
         rb.AddForce(direction * knockback * 50);
         yield return new WaitForSeconds(1f);
         canMove = true;
         canAttack = true;
+        if(!dead)spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
     }
     private void Death()
     {

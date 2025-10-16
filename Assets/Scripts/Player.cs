@@ -38,6 +38,8 @@ public class Player : MonoBehaviour, IDamageable
     private float strengthMultiplier = 1f;
     [SerializeField] private GameObject globalLight;
     [SerializeField] private GameObject pauseUI;
+    [SerializeField] private GameObject deathUI;
+    public bool dead;
 
     void Awake()
     {
@@ -128,11 +130,12 @@ public class Player : MonoBehaviour, IDamageable
 
     void Update()
     {
+        if(dead)return;
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(ReloadCoroutine());
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
             PauseGame();
         }
@@ -293,6 +296,10 @@ public class Player : MonoBehaviour, IDamageable
         Debug.Log("actual damage " + actualDamage);
         health -= Mathf.RoundToInt(actualDamage);
         healthSlider.value = (float)health / (float)maxHealth;
+        if(health <= 0)
+        {
+            Death();
+        }
         StartCoroutine(DamageCooldown(direction, knockback));
     }
     IEnumerator DamageCooldown(Vector2 direction, float knockback)
@@ -306,7 +313,7 @@ public class Player : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(seconds);
         canMove = true;
         canAttack = true;
-        spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
+        if(!dead)spriteRenderer.color = new Color(1f, 1f, 1f, 1f);
     }
     public void Heal(int amount)
     {
@@ -516,6 +523,12 @@ public class Player : MonoBehaviour, IDamageable
     }
     public void QuitGame()
     {
-        Application.Quit();
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(2);
+    }
+    public void Death()
+    {
+        dead = true;
+        deathUI.SetActive(true);
     }
 }

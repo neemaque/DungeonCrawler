@@ -9,9 +9,10 @@ public class GameManager : MonoBehaviour
     public List<FoodItem> foodItems;
     public List<MiscItem> miscItems;
     public List<NPC> npcs;
+    public int biome = 0;
     private void Awake()
     {
-        if (FindObjectsOfType<Player>().Length > 1)
+        if (FindObjectsOfType<GameManager>().Length > 1)
         {
             Destroy(gameObject);
             return;
@@ -158,6 +159,12 @@ public class GameManager : MonoBehaviour
         }
         return npcs[0];
     }
+    public NPC SpawnNPCPick()
+    {
+        if(biome == 0)return RollNPCWithIDs(new List<int>() {1,2,3});
+        if(biome == 1)return RollNPCWithIDs(new List<int>() {4,5,6});
+        else return null;
+    }
     public int GetProtection(int id)
     {
         foreach(ArmorItem x in armorItems)
@@ -243,6 +250,6 @@ public class NPC
     public int weaponOfChoice = 101;
     public float range = 10f;
     public int gang = 1;
-    public Sprite sprite;
+    public GameObject prefab;
 }
 
