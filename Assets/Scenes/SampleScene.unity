@@ -366,9 +366,9 @@ MonoBehaviour:
   - id: 101
     name: Wooden Sword
     description: A sword that's um wooden
-    rarity: 90
-    price: 0
-    sprite: {fileID: -8276234610682436239, guid: 78054457dfcbb8843b53fc1b49b75efb, type: 3}
+    rarity: 15
+    price: 50
+    sprite: {fileID: 21300000, guid: 78054457dfcbb8843b53fc1b49b75efb, type: 3}
     damage: 3
     range: 0.5
     knockback: 10
@@ -378,74 +378,170 @@ MonoBehaviour:
   - id: 102
     name: Rusty Axe
     description: Yerp that's an axe
-    rarity: 50
-    price: 0
-    sprite: {fileID: 7476813741468496705, guid: 1ff4a089786762a4fb556f7adc4f441a, type: 3}
-    damage: 10
+    rarity: 15
+    price: 200
+    sprite: {fileID: 21300000, guid: 1ff4a089786762a4fb556f7adc4f441a, type: 3}
+    damage: 7
     range: 0.5
     knockback: 10
-    preWait: 0.5
+    preWait: 0.7
     postWait: 1
     isRanged: 0
   - id: 103
     name: Cricket Bat
-    description: 
-    rarity: 90
-    price: 0
-    sprite: {fileID: 1741931788650262111, guid: 5148fff4ae150444c90ceb48498b166e, type: 3}
+    description: Shwoop
+    rarity: 15
+    price: 200
+    sprite: {fileID: 21300000, guid: 5148fff4ae150444c90ceb48498b166e, type: 3}
     damage: 5
     range: 0.5
     knockback: 10
     preWait: 0.5
     postWait: 1
     isRanged: 0
+  - id: 104
+    name: Slingshot
+    description: It works
+    rarity: 15
+    price: 200
+    sprite: {fileID: 21300000, guid: fbc9a51d70d516f45912dc099559d272, type: 3}
+    damage: 1
+    range: 9999
+    knockback: 10
+    preWait: 1
+    postWait: 1
+    isRanged: 1
   - id: 105
     name: Crowbar
-    description: 
-    rarity: 90
-    price: 0
-    sprite: {fileID: 7398687956713181485, guid: ee749c18e74af5348817b23d458cd557, type: 3}
+    description: Useful sometimes
+    rarity: 15
+    price: 250
+    sprite: {fileID: 21300000, guid: ee749c18e74af5348817b23d458cd557, type: 3}
     damage: 5
     range: 0.5
     knockback: 20
     preWait: 0
     postWait: 0.5
     isRanged: 0
+  - id: 106
+    name: Knight's Sword
+    description: Forged in mountains
+    rarity: 7
+    price: 500
+    sprite: {fileID: 21300000, guid: fc36be00d5c6f9e4ebb69422dbf26fcc, type: 3}
+    damage: 10
+    range: 0.7
+    knockback: 10
+    preWait: 0
+    postWait: 1.5
+    isRanged: 0
+  - id: 107
+    name: Diamond Sword
+    description: Shiny!
+    rarity: 1
+    price: 1000
+    sprite: {fileID: 21300000, guid: cc0e3182cace1ee4f8eb993b883fec4d, type: 3}
+    damage: 20
+    range: 1
+    knockback: 20
+    preWait: 0
+    postWait: 1
+    isRanged: 0
   - id: 108
     name: Karate Chop
-    description: 
-    rarity: 90
-    price: 0
-    sprite: {fileID: 4796414895607354492, guid: d0db76fe0f19d8d4fbf7eb6179a28b0a, type: 3}
+    description: idk
+    rarity: 7
+    price: 300
+    sprite: {fileID: 21300000, guid: d0db76fe0f19d8d4fbf7eb6179a28b0a, type: 3}
     damage: 5
     range: 0.3
     knockback: 10
     preWait: 0.5
     postWait: 0.5
     isRanged: 0
+  - id: 109
+    name: Wood Carving Knife
+    description: Small and cute
+    rarity: 5
+    price: 300
+    sprite: {fileID: 21300000, guid: e8044f9bb8e8a944eab1df1f1b4b8d3f, type: 3}
+    damage: 3
+    range: 0.3
+    knockback: 5
+    preWait: 0
+    postWait: 0.5
+    isRanged: 0
   - id: 110
     name: Big Ass Hammer
-    description: 
-    rarity: 90
-    price: 0
-    sprite: {fileID: -6816960056128848082, guid: e8e3e34d4133a4e43b3e64b55eb32cc1, type: 3}
+    description: Big and scary
+    rarity: 5
+    price: 500
+    sprite: {fileID: 21300000, guid: e8e3e34d4133a4e43b3e64b55eb32cc1, type: 3}
     damage: 15
     range: 0.7
     knockback: 20
-    preWait: 2
+    preWait: 1.5
     postWait: 2
     isRanged: 0
-  - id: 104
-    name: Slingshot
-    description: 
-    rarity: 90
-    price: 0
-    sprite: {fileID: 3683170113380467368, guid: fbc9a51d70d516f45912dc099559d272, type: 3}
-    damage: 1
+  - id: 111
+    name: Iron Axe
+    description: Sharpened with stone
+    rarity: 5
+    price: 300
+    sprite: {fileID: 21300000, guid: 8141198e02e79c44a8872df6d2e494dd, type: 3}
+    damage: 12
+    range: 0.5
+    knockback: 10
+    preWait: 1
+    postWait: 1
+    isRanged: 0
+  - id: 112
+    name: Shortbow
+    description: Uses arrows
+    rarity: 10
+    price: 200
+    sprite: {fileID: 21300000, guid: 2be40bbfff902444c83a5dec7bb95008, type: 3}
+    damage: 5
     range: 9999
     knockback: 10
     preWait: 1
     postWait: 1
+    isRanged: 1
+  - id: 113
+    name: Longbow
+    description: Uses arrows
+    rarity: 10
+    price: 300
+    sprite: {fileID: 21300000, guid: e58e72b80c2d87446af07ae2e399e24a, type: 3}
+    damage: 10
+    range: 9999
+    knockback: 20
+    preWait: 1.5
+    postWait: 1
+    isRanged: 1
+  - id: 114
+    name: Allium Bow
+    description: Onions! also uses arrows
+    rarity: 1
+    price: 750
+    sprite: {fileID: 21300000, guid: 3786ca9f656fa0141bea700491fd9379, type: 3}
+    damage: 15
+    range: 9999
+    knockback: 30
+    preWait: 1.5
+    postWait: 1
+    isRanged: 1
+  - id: 115
+    name: Laser Gun
+    description: Pew pew
+    rarity: 1
+    price: 1500
+    sprite: {fileID: 21300000, guid: d1d1e25b48f9faa419dba5f659e5ccbf, type: 3}
+    damage: 3
+    range: 9999
+    knockback: 10
+    preWait: 0
+    postWait: 0.5
     isRanged: 1
   armorItems:
   - id: 211
@@ -515,201 +611,267 @@ MonoBehaviour:
   - id: 501
     name: Apple
     description: Really red... ^_^
-    rarity: 90
+    rarity: 20
     price: 10
     sprite: {fileID: -7832214784768987486, guid: 0f04c3b39df67a242a972d0c9786a414, type: 3}
-    saturation: 1
+    saturation: 2
     isBakedGood: 0
   - id: 502
     name: Bread
-    description: 
-    rarity: 90
-    price: 15
+    description: Freshly baked!
+    rarity: 20
+    price: 20
     sprite: {fileID: -4431494890709657585, guid: a3579b4fce08b084188547b260b7ff5e, type: 3}
-    saturation: 2
+    saturation: 5
     isBakedGood: 1
   - id: 503
     name: Donut
-    description: 
-    rarity: 30
-    price: 30
+    description: Yum
+    rarity: 10
+    price: 50
     sprite: {fileID: 1352961961597019730, guid: 7bb8af232575a1740b83d6f417ab02e0, type: 3}
-    saturation: 2
+    saturation: 10
     isBakedGood: 1
   - id: 504
     name: Burger
-    description: 
-    rarity: 30
-    price: 50
+    description: Hungry Jack's
+    rarity: 10
+    price: 75
     sprite: {fileID: 6234330970754847308, guid: 561f222059093794f81d3c93a61f921a, type: 3}
-    saturation: 5
+    saturation: 15
     isBakedGood: 0
   - id: 505
     name: Golden Apple
-    description: 
-    rarity: 5
-    price: 150
+    description: Tastes like an apple
+    rarity: 1
+    price: 300
     sprite: {fileID: -7231559296163984513, guid: 821ce4b459738dc4ab632674828871eb, type: 3}
     saturation: 20
     isBakedGood: 0
   - id: 506
     name: Cheese Pizza
-    description: 
-    rarity: 30
-    price: 70
+    description: Your favorite
+    rarity: 10
+    price: 50
     sprite: {fileID: -4853659133146841966, guid: 05a6f7a819234984b8ecf78b8c5bb3b4, type: 3}
-    saturation: 5
+    saturation: 15
     isBakedGood: 0
   - id: 507
     name: Pineapple Pizza
-    description: 
+    description: Sorry
     rarity: 10
-    price: 75
+    price: 50
     sprite: {fileID: -1672422648893336719, guid: 7aec085207c902046bb49e0e78901ae2, type: 3}
-    saturation: 5
+    saturation: 15
     isBakedGood: 0
   - id: 508
     name: Vanilla Ice Cream
-    description: 
-    rarity: 40
-    price: 30
+    description: Yum
+    rarity: 20
+    price: 20
     sprite: {fileID: -7278009915296189503, guid: c441c584164c9234b9164d8a439e2859, type: 3}
     saturation: 2
     isBakedGood: 0
   - id: 509
     name: Churros
-    description: 
-    rarity: 30
-    price: 50
+    description: Yum
+    rarity: 10
+    price: 30
     sprite: {fileID: -4225795606395501813, guid: 6e5a3f37ca280ba40ac1f6dc7fca24af, type: 3}
-    saturation: 2
+    saturation: 5
     isBakedGood: 1
   - id: 510
     name: Meringue
-    description: 
-    rarity: 20
+    description: Yum
+    rarity: 10
     price: 50
     sprite: {fileID: -3434849807681097451, guid: b8a6e719c053fe94ab036d395290d4f7, type: 3}
-    saturation: 2
+    saturation: 5
     isBakedGood: 1
   - id: 511
     name: Pavlova
-    description: 
-    rarity: 20
+    description: Yum
+    rarity: 10
     price: 50
     sprite: {fileID: -6893239546928564269, guid: e208b2d9341e67348b8c6a8214b23f9a, type: 3}
-    saturation: 2
+    saturation: 5
     isBakedGood: 1
   - id: 512
     name: Instant Noodles
-    description: 
-    rarity: 50
+    description: High in sodium
+    rarity: 10
     price: 30
     sprite: {fileID: 5413976662712238634, guid: bcd2fa642dc867f4d815568144e0acd2, type: 3}
-    saturation: 5
+    saturation: 10
     isBakedGood: 0
   - id: 513
     name: Tangerine
-    description: 
-    rarity: 50
+    description: Or mandarin
+    rarity: 20
     price: 10
     sprite: {fileID: -543065302414226958, guid: 729b6ad103c989445b989ea65cb6154c, type: 3}
-    saturation: 1
+    saturation: 2
     isBakedGood: 0
   - id: 514
     name: Croissant
-    description: 
-    rarity: 30
-    price: 50
-    sprite: {fileID: -543065302414226958, guid: 729b6ad103c989445b989ea65cb6154c, type: 3}
-    saturation: 2
+    description: Fancy!
+    rarity: 10
+    price: 30
+    sprite: {fileID: -3877866709460508296, guid: acabe9f42b551c243852e42b4e11420d, type: 3}
+    saturation: 5
     isBakedGood: 1
   - id: 515
     name: Chocolate Chip Cookie
-    description: 
-    rarity: 30
-    price: 50
-    sprite: {fileID: -543065302414226958, guid: 729b6ad103c989445b989ea65cb6154c, type: 3}
+    description: Yum
+    rarity: 10
+    price: 30
+    sprite: {fileID: 5687110985967139564, guid: a489145d6725dce4db77ee518b6a1222, type: 3}
     saturation: 2
     isBakedGood: 1
-  - id: 513
-    name: Tangerine
-    description: 
-    rarity: 50
-    price: 10
-    sprite: {fileID: -543065302414226958, guid: 729b6ad103c989445b989ea65cb6154c, type: 3}
-    saturation: 1
-    isBakedGood: 0
+  - id: 516
+    name: Brownie
+    description: Yum
+    rarity: 10
+    price: 30
+    sprite: {fileID: 2193378693456512474, guid: e38ffc3274f60cd48bd7db980b1888af, type: 3}
+    saturation: 5
+    isBakedGood: 1
+  - id: 517
+    name: Coffee
+    description: It's alright
+    rarity: 10
+    price: 20
+    sprite: {fileID: 4687309882487268517, guid: f9a0bffe09d4ffe43a08996c66487428, type: 3}
+    saturation: 5
+    isBakedGood: 1
+  - id: 518
+    name: Milo
+    description: Your favorite
+    rarity: 20
+    price: 20
+    sprite: {fileID: -3807905394665254290, guid: 0b1e92a789c94bd4babdf6b035e44605, type: 3}
+    saturation: 5
+    isBakedGood: 1
+  - id: 519
+    name: Tea
+    description: Cuz I made the game haha
+    rarity: 10
+    price: 20
+    sprite: {fileID: 5958804951127212771, guid: ddbbc0eaea0f41e459cc094dc7ffd3ce, type: 3}
+    saturation: 5
+    isBakedGood: 1
   miscItems:
   - id: 1
     name: Coins
     description: Money
-    rarity: 100
+    rarity: 200
     price: 0
     sprite: {fileID: 8003260396191338441, guid: 649ea09738066d0498ab48aff7bc4b17, type: 3}
-  - id: 801
-    name: Red Key
-    description: Key that opens red locks
+  - id: 2
+    name: Red Gem
+    description: Shiny!
     rarity: 5
-    price: 300
-    sprite: {fileID: -6466862764005766312, guid: a4a9542035ad5f6448a79b8c6097de90, type: 3}
-  - id: 802
-    name: Blue Key
-    description: Key that opens blue locks
+    price: 500
+    sprite: {fileID: -5188543425160746151, guid: d2758326315ce6d43ad5bafb290a91ad, type: 3}
+  - id: 3
+    name: Blue Gem
+    description: Shiny!
     rarity: 5
-    price: 300
-    sprite: {fileID: -3373720867822365164, guid: 74dd96b5d9f95f44087e25201db9794f, type: 3}
-  - id: 803
-    name: Green Key
-    description: Key that opens green locks
+    price: 500
+    sprite: {fileID: -1385148051119193630, guid: 822d6e914840a1248a74f7d4939b79be, type: 3}
+  - id: 4
+    name: Green Gem
+    description: Shiny!
     rarity: 5
-    price: 300
-    sprite: {fileID: -6003823392913516840, guid: f12c90d381c67e242a44f6bccfe3dfb9, type: 3}
-  - id: 804
-    name: Golden Key
-    description: Key that opens all locks
+    price: 500
+    sprite: {fileID: 1379255488086340487, guid: 6b4b6b839b570dc41815b3ba2c2796b1, type: 3}
+  - id: 5
+    name: Cat Statue but it's blue
+    description: Why are you blue?
     rarity: 1
+    price: 1500
+    sprite: {fileID: -6843568322702813784, guid: 8ae48dc5a63ca0646a50bd0494bf6d17, type: 3}
+  - id: 6
+    name: Heart
+    description: Increases your max health
+    rarity: 5
+    price: 300
+    sprite: {fileID: -205270267638800340, guid: a722421bc76f50d488324d6cd4e3b9c2, type: 3}
+  - id: 7
+    name: Cat Statue
+    description: Cute
+    rarity: 5
     price: 1000
-    sprite: {fileID: 6000062402937345663, guid: e845e88489e570f49b0cfb2afeee4874, type: 3}
+    sprite: {fileID: -2703774513118467785, guid: 432cd57a081b5b644a7a26a2c2362e47, type: 3}
+  - id: 8
+    name: Christmas Gnome
+    description: Wooden
+    rarity: 5
+    price: 300
+    sprite: {fileID: 8370863220036387773, guid: ebc3e824422bac64a927a17ac8dcb3c1, type: 3}
   - id: 9
     name: Arrow
-    description: Key that opens all locks
-    rarity: 0
-    price: 0
+    description: One arrow
+    rarity: 30
+    price: 50
     sprite: {fileID: -765150924802650856, guid: 8fedf095e0239d84097a749bc34df038, type: 3}
   - id: 10
     name: Health Potion
-    description: Key that opens all locks
-    rarity: 0
-    price: 0
+    description: Heals 15HP
+    rarity: 10
+    price: 300
     sprite: {fileID: 3861579366159045020, guid: 6c1bb92860f872149a61333c89711384, type: 3}
   - id: 11
     name: Speed Potion
-    description: Key that opens all locks
-    rarity: 0
-    price: 0
+    description: x1.5 speed for 2 minutes
+    rarity: 10
+    price: 300
     sprite: {fileID: 6344561815293232008, guid: 18d93866aabaf9b489588bff191aea35, type: 3}
   - id: 12
     name: Strength Potion
-    description: Key that opens all locks
-    rarity: 0
-    price: 0
+    description: x2 strength for 2 minutes
+    rarity: 10
+    price: 300
     sprite: {fileID: -7924943432731760927, guid: 46b94cc378ba66147bbb036c7848d63b, type: 3}
   - id: 13
     name: Dandelion Potion
-    description: Key that opens all locks
-    rarity: 0
-    price: 0
+    description: Night vision for 2 minutes
+    rarity: 10
+    price: 300
     sprite: {fileID: -4680631867985453957, guid: c899f1399f1937c41ace1d360085f21e, type: 3}
+  - id: 801
+    name: Red Key
+    description: Opens red locks
+    rarity: 5
+    price: 500
+    sprite: {fileID: -6466862764005766312, guid: a4a9542035ad5f6448a79b8c6097de90, type: 3}
+  - id: 802
+    name: Blue Key
+    description: Opens blue locks
+    rarity: 5
+    price: 500
+    sprite: {fileID: -3373720867822365164, guid: 74dd96b5d9f95f44087e25201db9794f, type: 3}
+  - id: 803
+    name: Green Key
+    description: Opens green locks
+    rarity: 5
+    price: 500
+    sprite: {fileID: -6003823392913516840, guid: f12c90d381c67e242a44f6bccfe3dfb9, type: 3}
+  - id: 804
+    name: Gold Key
+    description: Opens all locks
+    rarity: 1
+    price: 1000
+    sprite: {fileID: 6000062402937345663, guid: e845e88489e570f49b0cfb2afeee4874, type: 3}
   npcs:
   - id: 1
     name: Zombie
     description: 
-    rarity: 1
+    rarity: 10
     maxHealth: 10
     moveSpeed: 2
     weaponOfChoice: 103
-    range: 10
+    range: 15
     gang: 1
     prefab: {fileID: 661270075334281227, guid: dfd679189a2e5c1469f076ff0dedc46e, type: 3}
   - id: 2
@@ -717,7 +879,7 @@ MonoBehaviour:
     description: 
     rarity: 10
     maxHealth: 5
-    moveSpeed: 3
+    moveSpeed: 4
     weaponOfChoice: 101
     range: 10
     gang: 3
@@ -728,7 +890,7 @@ MonoBehaviour:
     rarity: 10
     maxHealth: 5
     moveSpeed: 2
-    weaponOfChoice: 104
+    weaponOfChoice: 112
     range: 10
     gang: 1
     prefab: {fileID: 661270075334281227, guid: aee1ba71bf938cc43b6eb2af89a2ef2f, type: 3}
@@ -762,7 +924,117 @@ MonoBehaviour:
     range: 5
     gang: 3
     prefab: {fileID: 661270075334281227, guid: 3fd43f4839aa2fe43a8e831a191f54bd, type: 3}
-  biome: 1
+  - id: 7
+    name: Butterfly
+    description: 
+    rarity: 10
+    maxHealth: 10
+    moveSpeed: 2
+    weaponOfChoice: 114
+    range: 10
+    gang: 1
+    prefab: {fileID: 661270075334281227, guid: 72159ba97ab6d994a9edf8a218acebb2, type: 3}
+  - id: 8
+    name: Knight
+    description: 
+    rarity: 10
+    maxHealth: 20
+    moveSpeed: 2
+    weaponOfChoice: 106
+    range: 10
+    gang: 1
+    prefab: {fileID: 661270075334281227, guid: 9aba3c3d68698da499a06d94ff31c8a7, type: 3}
+  - id: 9
+    name: Archer Knight
+    description: 
+    rarity: 10
+    maxHealth: 15
+    moveSpeed: 2
+    weaponOfChoice: 113
+    range: 20
+    gang: 1
+    prefab: {fileID: 661270075334281227, guid: 5ff4487cb99f42343a4a4c0fb5d1ef0a, type: 3}
+  - id: 10
+    name: Sludge
+    description: 
+    rarity: 10
+    maxHealth: 10
+    moveSpeed: 6
+    weaponOfChoice: 109
+    range: 5
+    gang: 5
+    prefab: {fileID: 661270075334281227, guid: 90f1b1b2d6c2c5249b709c7a01bdfbaa, type: 3}
+  - id: 11
+    name: Alien
+    description: 
+    rarity: 20
+    maxHealth: 20
+    moveSpeed: 2
+    weaponOfChoice: 115
+    range: 10
+    gang: 1
+    prefab: {fileID: 661270075334281227, guid: 7ce1ff18c12ea0f4b92ef94c4f196f6f, type: 3}
+  biomes:
+  - id: 0
+    name: Cemetary
+    wallPrefab: {fileID: 9070397969361713009, guid: 1f802c8a5f7970d49ac5f21e0ae10be5, type: 3}
+    randomPrefabs:
+    - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
+    - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
+    - {fileID: 9070397969361713009, guid: ea72d35f53ed15b458fe5faef516c946, type: 3}
+    - {fileID: 9070397969361713009, guid: 4ee320b0d3eb3814ab72a990c026a935, type: 3}
+    - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
+    - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
+    - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
+    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
+    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
+    groundColor: {r: 0.09411765, g: 0.08235294, b: 0.078431375, a: 1}
+  - id: 1
+    name: Swamp
+    wallPrefab: {fileID: 9070397969361713009, guid: cb26d68691de34a45a4edf0d48fd59e0, type: 3}
+    randomPrefabs:
+    - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
+    - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
+    - {fileID: 9070397969361713009, guid: ea72d35f53ed15b458fe5faef516c946, type: 3}
+    - {fileID: 9070397969361713009, guid: 4ee320b0d3eb3814ab72a990c026a935, type: 3}
+    - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
+    - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
+    - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
+    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
+    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
+    groundColor: {r: 0.14226592, g: 0.21698111, b: 0.14226592, a: 1}
+  - id: 2
+    name: Swamp
+    wallPrefab: {fileID: 9070397969361713009, guid: cb26d68691de34a45a4edf0d48fd59e0, type: 3}
+    randomPrefabs:
+    - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
+    - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
+    - {fileID: 9070397969361713009, guid: ea72d35f53ed15b458fe5faef516c946, type: 3}
+    - {fileID: 9070397969361713009, guid: 4ee320b0d3eb3814ab72a990c026a935, type: 3}
+    - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
+    - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
+    - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
+    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
+    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
+    groundColor: {r: 0.8490566, g: 0.5768485, b: 0.22828408, a: 1}
+  - id: 3
+    name: Swamp
+    wallPrefab: {fileID: 9070397969361713009, guid: cb26d68691de34a45a4edf0d48fd59e0, type: 3}
+    randomPrefabs:
+    - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
+    - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
+    - {fileID: 9070397969361713009, guid: ea72d35f53ed15b458fe5faef516c946, type: 3}
+    - {fileID: 9070397969361713009, guid: 4ee320b0d3eb3814ab72a990c026a935, type: 3}
+    - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
+    - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
+    - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
+    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
+    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
+    groundColor: {r: 0.6037736, g: 0.27625492, b: 0.52074826, a: 1}
+  biome: 0
+  playerLevel: 0
+  npcspawnmin: -8
+  npcspawnmax: 2
 --- !u!4 &87678084
 Transform:
   m_ObjectHideFlags: 0
@@ -2133,7 +2405,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 532911471
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!1 &431248475
@@ -3723,6 +3995,85 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5663049946321910355, guid: 99e3db5f227b0a74f95e304c34137712, type: 3}
   m_PrefabInstance: {fileID: 115305651}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1137750542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1137750543}
+  - component: {fileID: 1137750545}
+  - component: {fileID: 1137750544}
+  m_Layer: 5
+  m_Name: Level Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1137750543
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137750542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1652055688}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -752.4, y: 493.3}
+  m_SizeDelta: {x: 300, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1137750544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137750542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Level: 0'
+--- !u!222 &1137750545
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137750542}
+  m_CullTransparentMesh: 1
 --- !u!224 &1146087840 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5663049946321910355, guid: 99e3db5f227b0a74f95e304c34137712, type: 3}
@@ -4333,6 +4684,8 @@ MonoBehaviour:
   exitPrefab: {fileID: 9070397969361713009, guid: 3fd99ca8a40dc614d951dcef8de9ac22, type: 3}
   specialRooms:
   - {fileID: 3011656512561094408, guid: 39695e34abd37b94da585f383b27f86d, type: 3}
+  - {fileID: 3011656512561094408, guid: 3e2cf79e330166842995708be877b457, type: 3}
+  - {fileID: 3011656512561094408, guid: bb926eaede1e18d479a7942c5815b4fa, type: 3}
   randomPrefabs:
   - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
   - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
@@ -4344,6 +4697,7 @@ MonoBehaviour:
   - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
   - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
   enemyPrefab: {fileID: 661270075334281227, guid: dfd679189a2e5c1469f076ff0dedc46e, type: 3}
+  groundSprite: {fileID: 1215970535}
   depthLimit: 10
 --- !u!4 &1319856277
 Transform:
@@ -5447,6 +5801,7 @@ RectTransform:
   - {fileID: 205962022}
   - {fileID: 992685072}
   - {fileID: 431450641}
+  - {fileID: 1137750543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5918,7 +6273,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.7
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 391a3a1bfbfe331e000000006f95c31fa1dd9a4c
@@ -6284,6 +6639,7 @@ MonoBehaviour:
   healthSlider: {fileID: 124618450}
   saturationSlider: {fileID: 992685073}
   coinText: {fileID: 431450642}
+  levelText: {fileID: 1137750544}
   sprites:
   - {fileID: -5467663392151881566, guid: 321fd335e0ece7f4494e8bb1f7beb83f, type: 3}
   - {fileID: -2830394127122789886, guid: 5d4b85fbfc70c9c46848fc0f0b497c20, type: 3}

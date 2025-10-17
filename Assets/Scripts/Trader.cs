@@ -65,6 +65,8 @@ public class Trader : MonoBehaviour, Interactable
 
             tradingItemTexts[i].text = item.name;
             tradingButtonTexts[i].text = price.ToString();
+            tradingItemImages[i].sprite = item.sprite;
+            tradingItemImages[i].preserveAspect = true;
         }
         for (int i = 5; i < 10; i++)
         {
@@ -81,6 +83,8 @@ public class Trader : MonoBehaviour, Interactable
 
             tradingItemTexts[i].text = item.name;
             tradingButtonTexts[i].text = price.ToString();
+            tradingItemImages[i].sprite = item.sprite;
+            tradingItemImages[i].preserveAspect = true;
         }
     }
     private void OnButtonPressed(int index)

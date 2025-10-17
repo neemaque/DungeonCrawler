@@ -9,7 +9,11 @@ public class GameManager : MonoBehaviour
     public List<FoodItem> foodItems;
     public List<MiscItem> miscItems;
     public List<NPC> npcs;
+    public Biome[] biomes;
     public int biome = 0;
+    public int playerLevel = 0;
+    public int npcspawnmin = -8;
+    public int npcspawnmax = 2;
     private void Awake()
     {
         if (FindObjectsOfType<GameManager>().Length > 1)
@@ -75,6 +79,14 @@ public class GameManager : MonoBehaviour
             {
                 if (x.isBakedGood) ids.Add(x.id);
             }
+        }
+        else if (type == "misc")
+        {
+            foreach (MiscItem x in miscItems)
+            {
+                if (x.id != 1) ids.Add(x.id);
+            }
+            ids.Add(505);
         }
         return ids;
     }
@@ -163,6 +175,8 @@ public class GameManager : MonoBehaviour
     {
         if(biome == 0)return RollNPCWithIDs(new List<int>() {1,2,3});
         if(biome == 1)return RollNPCWithIDs(new List<int>() {4,5,6});
+        if(biome == 2)return RollNPCWithIDs(new List<int>() {7,8,9});
+        if(biome == 3)return RollNPCWithIDs(new List<int>() {10,11});
         else return null;
     }
     public int GetProtection(int id)
@@ -253,3 +267,12 @@ public class NPC
     public GameObject prefab;
 }
 
+[System.Serializable]
+public class Biome
+{
+    public int id;
+    public string name;
+    public GameObject wallPrefab;
+    public GameObject[] randomPrefabs;
+    public Color groundColor;
+}

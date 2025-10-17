@@ -42,7 +42,6 @@ public class Companion : MonoBehaviour
             timer = 0;
         }
         timer2++;
-        Debug.Log(timer2);
         if(timer2 > 2500)
         {
             if(playerr.health < 3)
@@ -103,7 +102,7 @@ public class Companion : MonoBehaviour
     {
         int rand = Random.Range(0,2);
         if(rand == 0)text.text = sentence;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         text.text = "";
     }
 }

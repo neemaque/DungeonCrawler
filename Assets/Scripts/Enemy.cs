@@ -61,16 +61,23 @@ public class Enemy : MonoBehaviour, IDamageable
     private void BuildInventory()
     {
         inventory = new List<int>();
-        int numberOfCoins = Random.Range(2, 5);
+        int numberOfCoins = Random.Range(1, 5);
         for (int i = 0; i < numberOfCoins; i++)
         {
-
             inventory.Add(1);
         }
-        int rand = Random.Range(0, 3);
+        int rand = Random.Range(0, 10);
         if (rand == 0)
         {
             inventory.Add(weaponOfChoice);
+        }
+        if(weaponOfChoice > 111 && weaponOfChoice < 115)
+        {
+            int numberOfArrows = Random.Range(0, 5);
+            for(int i=0;i<numberOfArrows;i++)
+            {
+                inventory.Add(9);
+            }
         }
     }
     private void Update()

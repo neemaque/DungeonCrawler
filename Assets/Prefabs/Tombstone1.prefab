@@ -113,7 +113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1770871112172872446}
   m_Layer: 6
-  m_Name: BiomeSpecificExtra
+  m_Name: Tombstone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

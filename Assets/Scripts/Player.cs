@@ -16,6 +16,7 @@ public class Player : MonoBehaviour, IDamageable
     [SerializeField] private Slider healthSlider;
     [SerializeField] private Slider saturationSlider;
     [SerializeField] private Text coinText;
+    [SerializeField] private Text levelText;
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Weapon weapon;
@@ -81,8 +82,19 @@ public class Player : MonoBehaviour, IDamageable
     public void NextLevel()
     {
         Debug.Log("next leveled");
-        StartCoroutine(ReloadCoroutine());
         level++;
+        int maxLevel = PlayerPrefs.GetInt("HighestLevel", 0);
+        if(level > maxLevel)
+        {
+            PlayerPrefs.SetInt("HighestLevel", level);
+        }
+        levelText.text = "Level: " + level.ToString();
+        gameManager.playerLevel = level;
+        gameManager.biome = level%20/5;
+        gameManager.npcspawnmin = -8 + level%5 + level/20;
+        gameManager.npcspawnmax = 2 + level/20;
+        StartCoroutine(ReloadCoroutine());
+        
     }
     IEnumerator ReloadCoroutine()
     {
@@ -133,7 +145,7 @@ public class Player : MonoBehaviour, IDamageable
         if(dead)return;
         if (Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(ReloadCoroutine());
+            NextLevel();
         }
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
@@ -331,7 +343,7 @@ public class Player : MonoBehaviour, IDamageable
         if(weapon.isRanged)
         {
             bool hasArrows = false;
-            if(weapon.id == 104) hasArrows = true;
+            if(weapon.id == 104 || weapon.id == 115) hasArrows = true;
             else
             {
                 for(int i=0;i<inventory.Length;i++)

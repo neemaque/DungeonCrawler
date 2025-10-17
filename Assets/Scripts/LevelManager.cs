@@ -15,12 +15,14 @@ public class LevelManager : MonoBehaviour
     public GameObject[] specialRooms;
     public GameObject[] randomPrefabs;
     public GameObject enemyPrefab;
+    public SpriteRenderer groundSprite;
     private Player player;
     private GameManager gameManager;
     public int depthLimit = 5;
     private int maxDepth;
     private int exitX;
     private int exitY;
+    private bool addedspecial = false;
     [System.Serializable]
     public struct RoomConfig
     {
@@ -36,6 +38,10 @@ public class LevelManager : MonoBehaviour
     {
         player = GameObject.Find("Player").GetComponent<Player>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
+        wallPrefab = gameManager.biomes[gameManager.biome].wallPrefab;
+        randomPrefabs = gameManager.biomes[gameManager.biome].randomPrefabs;
+        groundSprite.color = gameManager.biomes[gameManager.biome].groundColor;
 
         taken = new bool[1000, 1000];
         rooms = new RoomConfig?[100, 100];
@@ -325,9 +331,9 @@ public class LevelManager : MonoBehaviour
         RoomConfig room = rooms[x, y].Value;
         used[x, y] = true;
         int isSpecial = Random.Range(-40, 2);
-        if(isSpecial > 0)
+        if(isSpecial > 0 && !addedspecial)
         {
-            Vector2 placement = AttemptPlace(4, 4, x, y);
+            Vector2 placement = AttemptPlace(6, 6, x, y);
             if (placement.x == -1000 || x == 25 && y == 25) 
             {
                 if (room.left == 1 && !used[x - 1, y]) AddSpecial(x - 1, y);
@@ -341,10 +347,11 @@ public class LevelManager : MonoBehaviour
             int rand = Random.Range(0, specialRooms.Length);
             Instantiate(specialRooms[rand], pos, Quaternion.identity);
             taken[(int)pos.x + 500, (int)pos.y + 500] = true;
+            addedspecial = true;
 
-            for (int ii = (int)placement.x; ii < (int)placement.x + 4; ii++)
+            for (int ii = (int)placement.x; ii < (int)placement.x + 6; ii++)
             {
-                for (int jj = (int)placement.y; jj > (int)placement.y - 4; jj--)
+                for (int jj = (int)placement.y; jj > (int)placement.y - 6; jj--)
                 {
 
                     int xx = (x - 25) * 8 + ii;
@@ -386,7 +393,8 @@ public class LevelManager : MonoBehaviour
     {
         used[x, y] = true;
         RoomConfig room = rooms[x, y].Value;
-        int numberOfEnemies = Random.Range(-5, 2);
+        Debug.Log("npc: " + gameManager.npcspawnmin + " " + gameManager.npcspawnmax);
+        int numberOfEnemies = Random.Range(gameManager.npcspawnmin, gameManager.npcspawnmax);
         while (numberOfEnemies > 0)
         {
             if (totalNPCs >= NPCLimit || x==25 && y==25) break;
