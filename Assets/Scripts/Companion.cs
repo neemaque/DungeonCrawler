@@ -7,11 +7,14 @@ public class Companion : MonoBehaviour
     private Transform target;
     public float smoothSpeed = 2f;
     public SpriteRenderer spriteRenderer;
+    public Sprite mainSprite;
+    public Sprite kissingSprite;
     private GameObject player;
     private Player playerr;
     private Vector3 offset;
     private int timer;
     private int timer2;
+    private bool busy;
     public Text text;
     void Start()
     {
@@ -29,12 +32,20 @@ public class Companion : MonoBehaviour
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed * Time.deltaTime);
         transform.position = smoothedPosition;
 
+        if(desiredPosition.x < transform.position.x - 0.2f)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
         timer++;
         if (timer > 1000)
         {
             Debug.Log("try for");
             int rand = Random.Range(0, 5);
-            if (rand == 0)
+            if (rand == 0 && !busy)
             {
                 Debug.Log("coming closer");
                 StartCoroutine(ComeClose());
@@ -42,7 +53,7 @@ public class Companion : MonoBehaviour
             timer = 0;
         }
         timer2++;
-        if(timer2 > 2500)
+        if(timer2 > 2500 && !busy)
         {
             if(playerr.health < 3)
             {
@@ -88,6 +99,8 @@ public class Companion : MonoBehaviour
         offset.y = 0f;
         smoothSpeed = 4f;
         spriteRenderer.sortingOrder = 6;
+        spriteRenderer.sprite = kissingSprite;
+        StartCoroutine(Say("muahh"));
         yield return new WaitForSeconds(2);
 
         smoothSpeed = 2f;
@@ -97,12 +110,15 @@ public class Companion : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         spriteRenderer.sortingOrder = 4;
+        spriteRenderer.sprite = mainSprite;
     }
     IEnumerator Say(string sentence)
     {
+        busy = true;
         int rand = Random.Range(0,2);
-        if(rand == 0)text.text = sentence;
+        if(rand == 0 || sentence == "muahh")text.text = sentence;
         yield return new WaitForSeconds(4f);
         text.text = "";
+        busy = false;
     }
 }

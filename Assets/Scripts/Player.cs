@@ -64,14 +64,8 @@ public class Player : MonoBehaviour, IDamageable
         inventoryStacks[3] = 1;
 
         
-        inventory[10] = 10;
+        inventory[10] = 6;
         inventoryStacks[10] = 1;
-        inventory[11] = 11;
-        inventoryStacks[11] = 1;
-        inventory[12] = 12;
-        inventoryStacks[12] = 1;
-        inventory[13] = 13;
-        inventoryStacks[13] = 1;
         
 
         StartCoroutine(HungerTimer());
@@ -411,6 +405,12 @@ public class Player : MonoBehaviour, IDamageable
         else if(inventory[slot] == 13)
         {
             StartCoroutine(DandelionPotion());
+            DeleteItem(slot);
+        }
+        else if(inventory[slot] == 6)
+        {
+            maxHealth += 5;
+            Heal(100);
             DeleteItem(slot);
         }
     }

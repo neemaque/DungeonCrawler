@@ -1000,37 +1000,33 @@ MonoBehaviour:
     - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
     - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
     - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
-    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
-    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
-    groundColor: {r: 0.14226592, g: 0.21698111, b: 0.14226592, a: 1}
+    - {fileID: 9070397969361713009, guid: 58d77f05bc9018c45ac73e7a163637cf, type: 3}
+    - {fileID: 9070397969361713009, guid: 8fda516459dd79f4480dc69db8255aab, type: 3}
+    groundColor: {r: 0.1509434, g: 0.1256675, b: 0.100391604, a: 1}
   - id: 2
-    name: Swamp
-    wallPrefab: {fileID: 9070397969361713009, guid: cb26d68691de34a45a4edf0d48fd59e0, type: 3}
+    name: Castle
+    wallPrefab: {fileID: 9070397969361713009, guid: 4eb99689100dd564bb43e23ef847f4d8, type: 3}
     randomPrefabs:
     - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
-    - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
-    - {fileID: 9070397969361713009, guid: ea72d35f53ed15b458fe5faef516c946, type: 3}
-    - {fileID: 9070397969361713009, guid: 4ee320b0d3eb3814ab72a990c026a935, type: 3}
-    - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
+    - {fileID: 9070397969361713009, guid: 75c7b9161a2878e4cbeeed78faa8633b, type: 3}
+    - {fileID: 9070397969361713009, guid: 75c7b9161a2878e4cbeeed78faa8633b, type: 3}
+    - {fileID: 9070397969361713009, guid: 75c7b9161a2878e4cbeeed78faa8633b, type: 3}
+    - {fileID: 9070397969361713009, guid: 75c7b9161a2878e4cbeeed78faa8633b, type: 3}
+    - {fileID: 9070397969361713009, guid: 75c7b9161a2878e4cbeeed78faa8633b, type: 3}
     - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
-    - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
-    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
-    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
-    groundColor: {r: 0.8490566, g: 0.5768485, b: 0.22828408, a: 1}
+    - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
+    - {fileID: 9070397969361713009, guid: 2a1a1492d6a108e47873bb69be325fa9, type: 3}
+    groundColor: {r: 0.27451938, g: 0.2924528, b: 0.28886613, a: 1}
   - id: 3
-    name: Swamp
-    wallPrefab: {fileID: 9070397969361713009, guid: cb26d68691de34a45a4edf0d48fd59e0, type: 3}
+    name: Space
+    wallPrefab: {fileID: 9070397969361713009, guid: d38cbfb9037b944498d7b1755b7c2609, type: 3}
     randomPrefabs:
     - {fileID: 7975779727882042869, guid: 15a610664cbb3a246ba27e6b8ecab25b, type: 3}
     - {fileID: 9070397969361713009, guid: d4308206ea6b95a46a2670038f725593, type: 3}
     - {fileID: 9070397969361713009, guid: ea72d35f53ed15b458fe5faef516c946, type: 3}
-    - {fileID: 9070397969361713009, guid: 4ee320b0d3eb3814ab72a990c026a935, type: 3}
-    - {fileID: 9070397969361713009, guid: 2f49fdb1f72e314439f2e26497b39000, type: 3}
-    - {fileID: 9070397969361713009, guid: 40fc5c958b4d4f24ab7cb6ad7aa66d77, type: 3}
-    - {fileID: 9070397969361713009, guid: 9bdb7af0c53145c42bfa22f5acca040e, type: 3}
-    - {fileID: 9070397969361713009, guid: 232050e8d0235e0469ffb3003e5c3170, type: 3}
-    - {fileID: 9070397969361713009, guid: bd6f91ed3ce748044b1c756e9f4d2413, type: 3}
-    groundColor: {r: 0.6037736, g: 0.27625492, b: 0.52074826, a: 1}
+    - {fileID: 9070397969361713009, guid: 13b3e64ee8a53ff43bbdd7edc1a50237, type: 3}
+    - {fileID: 9070397969361713009, guid: 7dddf388b3eb83d449d7b112ca04bae4, type: 3}
+    groundColor: {r: 0.07489321, g: 0.08093078, b: 0.103773594, a: 1}
   biome: 0
   playerLevel: 0
   npcspawnmin: -8
@@ -1078,7 +1074,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 751653592}
@@ -1130,8 +1126,8 @@ SpriteRenderer:
   m_SortingLayerID: 1285217697
   m_SortingLayer: 1
   m_SortingOrder: 4
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.8090315, b: 0.3066038, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2160da375aa6e4e479e2a0a8c09ba281, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -3577,6 +3573,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Companion
   smoothSpeed: 2
   spriteRenderer: {fileID: 92918805}
+  mainSprite: {fileID: 21300000, guid: 2160da375aa6e4e479e2a0a8c09ba281, type: 3}
+  kissingSprite: {fileID: 21300000, guid: 1b1e44667f65faa4d9e81ec4b1c1205e, type: 3}
   text: {fileID: 1481176833}
 --- !u!4 &751653592
 Transform:
@@ -3587,7 +3585,7 @@ Transform:
   m_GameObject: {fileID: 751653590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.28, y: 2.46499, z: 0}
+  m_LocalPosition: {x: 2.1, y: 5.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5282,7 +5280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.08}
+  m_AnchoredPosition: {x: 0, y: 1.2}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1481176833
