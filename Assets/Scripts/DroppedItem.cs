@@ -34,7 +34,21 @@ public class DroppedItem : MonoBehaviour, Interactable
         float dropForce = Random.Range(150f, 250f);
         rb.AddForce(dir * dropForce);
     }
-
+    public void InitializeForPlayer(int id)
+    {
+        this.id = id;
+        foreach (Item x in gameManager.items)
+        {
+            if (x.id == id)
+            {
+                item = x;
+            }
+        }
+        itemSprite.sprite = item.sprite;
+        Vector2 dir = (player.transform.position - transform.position).normalized;
+        float dropForce = Random.Range(150f, 250f);
+        rb.AddForce(dir * dropForce);
+    }
     public void Interact()
     {
         player.GetComponent<Player>().AddItem(id);

@@ -58,14 +58,6 @@ public class Player : MonoBehaviour, IDamageable
         inventoryStacks[2] = 1;
         inventory[1] = 501;
         inventoryStacks[1] = 3;
-        inventory[6] = 9;
-        inventoryStacks[6] = 3;
-        inventory[3] = 104;
-        inventoryStacks[3] = 1;
-
-        
-        inventory[10] = 6;
-        inventoryStacks[10] = 1;
         
 
         StartCoroutine(HungerTimer());
@@ -137,10 +129,6 @@ public class Player : MonoBehaviour, IDamageable
     void Update()
     {
         if(dead)return;
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            NextLevel();
-        }
         if (Input.GetKeyDown(KeyCode.Escape) && health > 0)
         {
             PauseGame();

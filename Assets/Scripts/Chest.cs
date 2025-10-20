@@ -47,7 +47,7 @@ public class Chest : MonoBehaviour, Interactable
         foreach (int id in inventory)
         {
             GameObject droppedItem = Instantiate(droppedItemPrefab, transform.position, Quaternion.identity);
-            droppedItem.GetComponent<DroppedItem>().Initialize(id);
+            droppedItem.GetComponent<DroppedItem>().InitializeForPlayer(id);
 
             yield return new WaitForSeconds(0.01f);
         }
